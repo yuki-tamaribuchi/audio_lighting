@@ -7,6 +7,8 @@ from scipy.io import wavfile
 class AudioLighting():
 
     loaded_data={}
+    lr_separated_data={}
+    cut_data=[]
 
     def __init__(self):
         pass
@@ -16,11 +18,20 @@ class AudioLighting():
         rate,data=wavfile.read(file)
         self.loaded_data = {'rate':rate,'data':data}
 
+
+    def cut(self,data,start,end):
+        self.cut_data=data[(start*self.loaded_data['rate']):(end*self.loaded_data['rate']),:]
+        
     
-    #def hpss
+    def lr_separate(self,data):
+        self.lr_separated_data={'left':data[:,0],'right':data[:,1]}
+
+    #def hpss_execute()
 
     
 
 al1=AudioLighting()
 al1.load_music('file.wav')
-print(al1.loaded_data['rate'])
+al1.cut(al1.loaded_data['data'],10,20)
+al1.lr_separate(al1.cut_data)
+print(al1.lr_separated_data['left'])

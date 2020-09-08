@@ -43,9 +43,10 @@ class AudioLighting():
         self.hpss_data={'harmonic':harmonic,'percussive':percussive}
         print('HPSS End')
 
-    #def chromacqt_execute(self,data,hop_length,n_octaves=2,n_chroma=24):
-    #    chrcqt=librosa.feature.chroma_cqt(y=data,sr=)
-        
+    def chromacqt_execute(self,data,hop_length=512,n_octaves=2,n_chroma=12):
+        print('Chroma CQT Start')
+        self.chrcqt_data=librosa.feature.chroma_cqt(y=data,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
+        print('Chroma CQT End')
 
     
 
@@ -54,4 +55,6 @@ al1.load_music('file.wav')
 al1.cut(al1.loaded_data,10,20)
 al1.lr_separate(al1.cut_data)
 al1.hpss_execute(al1.lr_separated_data['left'])
-print(al1.hpss_data['harmonic'])
+al1.chromacqt_execute(al1.hpss_data)
+
+print(al1.chrcqt_data)

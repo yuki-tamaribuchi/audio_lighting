@@ -57,10 +57,15 @@ class AudioLighting():
         self.chrcqt_data=librosa.feature.chroma_cqt(y=data,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
         print('Chroma CQT End')
 
-
+    
+    def disp_chrcqt(self,data,hop_length=512):
+        plt.figure(figsize=(15,5))
+        librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
+        plt.show()
 
 
     '''
+    実装一時停止
     def full_execute(self,file,start=None,end=None,l_or_r=None,chroma_mode='harmonic',hop_length='512',n_octaves=2,n_chroma=12):
         self.load_music(file)
 
@@ -79,7 +84,7 @@ class AudioLighting():
         '''
 
     
-
+#実装サンプル
 al1=AudioLighting()
 al1.load_music('file.wav')
 al1.cut(al1.loaded_data,7,56)
@@ -88,3 +93,4 @@ al1.hpss_execute(al1.lr_separated_data,'right')
 al1.chromacqt_execute(al1.hpss_data['harmonic'])
 
 print(al1.chrcqt_data)
+al1.disp_chrcqt(al1.chrcqt_data)

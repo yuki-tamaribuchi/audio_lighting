@@ -55,6 +55,6 @@ al1.load_music('file.wav')
 al1.cut(al1.loaded_data,10,20)
 al1.lr_separate(al1.cut_data)
 al1.hpss_execute(al1.lr_separated_data['left'])
-al1.chromacqt_execute(al1.hpss_data)
+al1.chromacqt_execute(al1.hpss_data['harmonic'])
 
 print(al1.chrcqt_data)

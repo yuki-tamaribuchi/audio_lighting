@@ -60,7 +60,7 @@ class AudioLighting():
 
 
 
-
+    '''
     def full_execute(self,file,start=None,end=None,l_or_r=None,chroma_mode='harmonic',hop_length='512',n_octaves=2,n_chroma=12):
         self.load_music(file)
 
@@ -76,20 +76,15 @@ class AudioLighting():
 
         self.hpss_execute(self.lr_separated_data,l_or_r)
         self.chromacqt_execute(self.hpss_data,chroma_mode,hop_length,n_octaves,n_chroma)
-
+        '''
 
     
 
 al1=AudioLighting()
 al1.load_music('file.wav')
-al1.cut(al1.loaded_data,10,5)
+al1.cut(al1.loaded_data,7,56)
 al1.lr_separate(al1.cut_data)
 al1.hpss_execute(al1.lr_separated_data,'right')
 al1.chromacqt_execute(al1.hpss_data['harmonic'])
 
 print(al1.chrcqt_data)
-
-
-al2=AudioLighting()
-al2.full_execute('file.wav',20,25,'right')
-print(al2.chrcqt_data)

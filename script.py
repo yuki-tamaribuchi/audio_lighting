@@ -3,6 +3,7 @@ import librosa
 import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
+import csv
 
 class AudioLighting():
 
@@ -63,6 +64,14 @@ class AudioLighting():
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()
 
+    
+    def export_csv(self):
+        print('Export Start')
+        with open('data.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.chrcqt_data)
+        print('Export End')
+
 
     '''
     実装一時停止
@@ -87,10 +96,12 @@ class AudioLighting():
 #実装サンプル
 al1=AudioLighting()
 al1.load_music('file.wav')
-al1.cut(al1.loaded_data,7,56)
-al1.lr_separate(al1.cut_data)
+#al1.cut(al1.loaded_data,7,56)
+#al1.lr_separate(al1.cut_data)
+al1.lr_separate(al1.loaded_data)
 al1.hpss_execute(al1.lr_separated_data,'right')
 al1.chromacqt_execute(al1.hpss_data['harmonic'])
 
 print(al1.chrcqt_data)
 al1.disp_chrcqt(al1.chrcqt_data)
+al1.export_csv()

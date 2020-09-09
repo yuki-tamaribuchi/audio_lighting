@@ -13,6 +13,7 @@ class ChromaCqt():
     hpss_data={}
     chrcqt_data=[]
     rate=0
+    io_array=[]
 
     def __init__(self):
         pass
@@ -64,6 +65,8 @@ class ChromaCqt():
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()
 
+
+
     
     def export_csv(self):
         print('Export Start')
@@ -71,6 +74,15 @@ class ChromaCqt():
             writer=csv.writer(f)
             writer.writerows(self.chrcqt_data)
         print('Export End')
+
+
+    def create_io_array(self):
+        self.io_array=np.where(self.chrcqt_data==1.0,1,0)
+        
+        with open('io_array.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.io_array)
+
 
 
     '''

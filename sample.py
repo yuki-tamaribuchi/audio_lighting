@@ -11,4 +11,4 @@ cc1.chromacqt_execute(cc1.hpss_data['harmonic'])
 
 print(cc1.chrcqt_data)
 cc1.disp_chrcqt(cc1.chrcqt_data)
-al1.export_csv()
+cc1.export_csv()

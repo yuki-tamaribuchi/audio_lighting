@@ -20,5 +20,3 @@ cc1.create_io_array()
 
 pl1=Player(cc1.loaded_data[:,0],cc1.rate)
 pl1.play_w_lightring()
-
-time.sleep(1)

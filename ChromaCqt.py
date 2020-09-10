@@ -8,6 +8,7 @@ import csv
 class ChromaCqt():
 
     loaded_data=[]
+    normalized_data=[]
     lr_separated_data={}
     cut_data=[]
     hpss_data={}
@@ -21,10 +22,8 @@ class ChromaCqt():
 
     def load_music(self,file):
         print('Loading Start')
-        rate,data=wavfile.read(file)
-        data=data/32768
-        self.rate=rate
-        self.loaded_data = data
+        self.rate,self.loaded_data=wavfile.read(file)
+        self.normalized_data=self.loaded_data/32768
         print('Loading End')
 
 

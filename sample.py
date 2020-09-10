@@ -4,7 +4,7 @@ import time
 
 #実装サンプル
 cc1=ChromaCqt()
-cc1.load_music('file.wav')
+cc1.load_music('file2.wav')
 #cc1.cut(cc1.loaded_data,7,56)
 #cc1.lr_separate(cc1.cut_data)
 

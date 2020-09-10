@@ -13,5 +13,6 @@ class Player():
     def play_w_lightring(self):
         sounddevice.play(self.audio_data,self.rate)
         audio_len=len(self.audio_data)/self.rate
-        print(audio_len,'sec')
+        print('Audio Length=',round(audio_len),'sec')
         time.sleep(audio_len)
+

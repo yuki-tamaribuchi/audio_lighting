@@ -12,6 +12,7 @@ librosa = "*"
 matplotlib = "*"
 scipy = "*"
 sounddevice = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.8"

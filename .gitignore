@@ -4,3 +4,4 @@ data.csv
 *.pyc
 io_array.csv
 file2.wav
+.vscode/

@@ -25,16 +25,6 @@ class ChromaCqt():
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
         print('Loading End')
-
-
-    def cut(self,data,start,end):
-        if start>end:
-            print('error...end sec is shorter than start sec')
-            exit()
-        else:
-            print('Cutting Start')
-            self.cut_data=data[(start*self.rate):(end*self.rate),:]
-            print('Cutting End')
         
     
     def lr_separate(self,data):
@@ -42,15 +32,11 @@ class ChromaCqt():
         self.lr_separated_data={'left':data[:,0],'right':data[:,1]}
         print('Separating End')
 
-    def hpss_execute(self,data,l_or_r=None):
+    def hpss_execute(self,data):
         print('HPSS Start')
-        if l_or_r == None:
-            left_harmonic,left_percussive=librosa.effects.hpss(data['left'])
-            right_harmonic,right_percussive=librosa.effects.hpss(data['right'])
-            self.hpss_data={'left':{'harmonic':left_harmonic,'percussive':left_percussive},'right':{'harmonic':right_harmonic,'percussive':right_percussive}}
-        else:
-            harmonic,percussive=librosa.effects.hpss(data[l_or_r])
-            self.hpss_data={'harmonic':harmonic,'percussive':percussive}
+        left_harmonic,left_percussive=librosa.effects.hpss(data['left'])
+        right_harmonic,right_percussive=librosa.effects.hpss(data['right'])
+        self.hpss_data={'left':{'harmonic':left_harmonic,'percussive':left_percussive},'right':{'harmonic':right_harmonic,'percussive':right_percussive}}
         print('HPSS End')
 
     def chromacqt_execute(self,data,chroma_mode='harmonic',hop_length=512,n_octaves=2,n_chroma=12):

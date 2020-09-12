@@ -12,13 +12,15 @@ class ChromaCqt():
     lr_separated_data={}
     cut_data=[]
     hpss_data={}
-    chrcqt_specified_data=[]
-    chrcqt_full_data={}
+    chrcqt_data={}
     rate=0
     io_array=[]
 
-    def __init__(self):
-        pass
+    def __init__(self,file):
+        self.load_music(file)
+        self.lr_separate(self.normalized_data)
+        self.hpss_execute(self.lr_separated_data)
+        self.chromacqt_execute(self.hpss_data)
 
 
     def load_music(self,file):
@@ -40,16 +42,12 @@ class ChromaCqt():
         self.hpss_data={'left':{'harmonic':left_harmonic,'percussive':left_percussive},'right':{'harmonic':right_harmonic,'percussive':right_percussive}}
         print('HPSS End')
 
-    def chromacqt_execute_specified(self,data,chroma_mode='harmonic',hop_length=512,n_octaves=2,n_chroma=12):
-        print('Chroma CQT Start')
-        self.chrcqt_data=librosa.feature.chroma_cqt(y=data,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
-        print('Chroma CQT End')
 
 
-    def chromacqt_execute_full(self,data,chroma_mode='harmonic',hop_length=512,n_octaves=2,n_chroma=12):
+    def chromacqt_execute(self,data,chroma_mode='harmonic',hop_length=512,n_octaves=2,n_chroma=12):
         print('Chroma CQT Start')
-        self.chrcqt_full_data['left']=librosa.feature.chroma_cqt(y=data['left']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
-        self.chrcqt_full_data['right']=librosa.feature.chroma_cqt(y=data['right']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
+        self.chrcqt_data['left']=librosa.feature.chroma_cqt(y=data['left']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
+        self.chrcqt_data['right']=librosa.feature.chroma_cqt(y=data['right']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
 
         print('Chroma CQT End')
 

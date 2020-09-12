@@ -21,6 +21,7 @@ class ChromaCqt():
         self.lr_separate(self.normalized_data)
         self.hpss_execute(self.lr_separated_data)
         self.chromacqt_execute(self.hpss_data)
+        self.create_io_array()
 
 
     def load_music(self,file):

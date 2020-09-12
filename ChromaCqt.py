@@ -4,13 +4,14 @@ import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
 import csv
+import json
 
 class ChromaCqt():
 
+    
     loaded_data=[]
     normalized_data=[]
     lr_separated_data={}
-    cut_data=[]
     hpss_data={}
     chrcqt_data={}
     rate=0
@@ -22,6 +23,8 @@ class ChromaCqt():
         self.hpss_execute(self.lr_separated_data)
         self.chromacqt_execute(self.hpss_data)
         self.create_io_array()
+        self.music_length=len(self.loaded_data)
+        self.save_to_json()
 
 
     def load_music(self,file):
@@ -72,6 +75,12 @@ class ChromaCqt():
     def create_io_array(self):
         self.io_array['left']=np.where(self.chrcqt_data['left']==1.0,1,0)
         self.io_array['right']=np.where(self.chrcqt_data['right']==1.0,1,0)
+
+        
+    def save_to_json(self):
+        save_data={'music_length':self.music_length,'loaded_data':self.loaded_data,'normalized_data':self.normalized_data,'chrcqt_data':self.chrcqt_data,'rate':self.rate,'io_array':self.io_array}
+        with open('data.json','w') as f:
+            json.dump(save_data,f)
 
 
 

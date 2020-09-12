@@ -4,9 +4,13 @@ import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
 import csv
+import pickle
+import hashlib
+import pandas as pd
 
 class ChromaCqt():
 
+    hashed_data=''
     loaded_data=[]
     normalized_data=[]
     lr_separated_data={}
@@ -22,6 +26,8 @@ class ChromaCqt():
 
     def load_music(self,file):
         print('Loading Start')
+        self.hashed_data=hashlib.md5(file.encode()).hexdigest()
+        print('HASHED(MD5):',self.hashed_data)
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
         print('Loading End')
@@ -63,6 +69,12 @@ class ChromaCqt():
         plt.figure(figsize=(15,5))
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()
+
+    
+    def save_pickle(self):
+        full_data={'hashed':self.hashed_data}
+        with open('full_data.pickle','wb') as f:
+            pickle.dump(full_data,f)
 
 
 

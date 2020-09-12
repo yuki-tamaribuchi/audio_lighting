@@ -14,7 +14,7 @@ class ChromaCqt():
     hpss_data={}
     chrcqt_data={}
     rate=0
-    io_array=[]
+    io_array={}
 
     def __init__(self,file):
         self.load_music(file)
@@ -69,11 +69,9 @@ class ChromaCqt():
 
 
     def create_io_array(self):
-        self.io_array=np.where(self.chrcqt_data==1.0,1,0)
-        
-        with open('io_array.csv','w') as f:
-            writer=csv.writer(f)
-            writer.writerows(self.io_array)
+        self.io_array['left']=np.where(self.chrcqt_data['left']==1.0,1,0)
+        self.io_array['right']=np.where(self.chrcqt_data['right']==1.0,1,0)
+
 
 
 

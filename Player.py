@@ -4,6 +4,8 @@ import time
 
 class Player():
 
+    scale=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+
     def __init__(self,audio_data,rate,lighting_data):
         self.audio_data=audio_data
         self.rate=rate

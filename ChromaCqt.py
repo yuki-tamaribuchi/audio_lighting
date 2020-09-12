@@ -44,7 +44,7 @@ class ChromaCqt():
 
 
 
-    def chromacqt_execute(self,data,chroma_mode='harmonic',hop_length=512,n_octaves=2,n_chroma=12):
+    def chromacqt_execute(self,data,chroma_mode='harmonic',hop_length=2048,n_octaves=2,n_chroma=12):
         print('Chroma CQT Start')
         self.chrcqt_data['left']=librosa.feature.chroma_cqt(y=data['left']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
         self.chrcqt_data['right']=librosa.feature.chroma_cqt(y=data['right']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
@@ -52,7 +52,7 @@ class ChromaCqt():
         print('Chroma CQT End')
 
     
-    def disp_chrcqt(self,data,hop_length=512):
+    def disp_chrcqt(self,data,hop_length=2048):
         plt.figure(figsize=(15,5))
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()

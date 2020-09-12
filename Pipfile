@@ -11,6 +11,7 @@ numpy = "*"
 librosa = "*"
 matplotlib = "*"
 scipy = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.8"

@@ -9,12 +9,19 @@ class ChromaCqt():
 
     loaded_data=[]
     normalized_data=[]
-    lr_separated_data={}
+    left_data=[]
+    right_data=[]
+
     cut_data=[]
-    hpss_data={}
-    chrcqt_data={}
+    hpss_harmonics_left=[]
+    hpss_harmonics_right=[]
+    hpss_percussion_left=[]
+    hpss_percussion_right=[]
+    chrcqt_left_data=[]
+    chrcqt_right_data=[]
     rate=0
-    io_array={}
+    io_array_left=[]
+    io_array_rihgt=[]
 
     def __init__(self,file):
         self.load_music(file)

@@ -20,8 +20,8 @@ class ChromaCqt():
     chrcqt_left_data=[]
     chrcqt_right_data=[]
     rate=0
-    io_array_left=[]
-    io_array_rihgt=[]
+    chroma_array_left=[]
+    chroma_array_rihgt=[]
 
     def __init__(self,file):
         self.load_music(file)
@@ -54,8 +54,8 @@ class ChromaCqt():
 
     def chromacqt_execute(self,data,chroma_mode='harmonic',hop_length=2048,n_octaves=2,n_chroma=12):
         print('Chroma CQT Start')
-        self.chrcqt_data['left']=librosa.feature.chroma_cqt(y=data['left']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
-        self.chrcqt_data['right']=librosa.feature.chroma_cqt(y=data['right']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
+        self.chrcqt_left_data=librosa.feature.chroma_cqt(y=data['left']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
+        self.chrcqt_right_data=librosa.feature.chroma_cqt(y=data['right']['harmonic'],sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
 
         print('Chroma CQT End')
 
@@ -72,13 +72,13 @@ class ChromaCqt():
         print('Export Start')
         with open('data.csv','w') as f:
             writer=csv.writer(f)
-            writer.writerows(self.chrcqt_data)
+            writer.writerows(self.chrcqt_left_data,self.chrcqt_right_data)
         print('Export End')
 
 
     def create_io_array(self):
-        self.io_array['left']=np.where(self.chrcqt_data['left']==1.0,1,0)
-        self.io_array['right']=np.where(self.chrcqt_data['right']==1.0,1,0)
+        self.chroma_array_left=np.where(self.chrcqt_left_data==1.0,1,0)
+        self.chroma_array_left=np.where(self.chrcqt_right_data==1.0,1,0)
 
 
 

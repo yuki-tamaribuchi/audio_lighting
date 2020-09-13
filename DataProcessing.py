@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 from scipy.io import wavfile
 import csv
 
-class ChromaCqt():
+class DataProcessing():
 
     loaded_data=[]
     normalized_data=[]
@@ -80,25 +80,4 @@ class ChromaCqt():
         self.chroma_array_left=np.where(self.chrcqt_left_data==1.0,1,0)
         self.chroma_array_left=np.where(self.chrcqt_right_data==1.0,1,0)
 
-
-
-
-    '''
-    実装一時停止
-    def full_execute(self,file,start=None,end=None,l_or_r=None,chroma_mode='harmonic',hop_length='512',n_octaves=2,n_chroma=12):
-        self.load_music(file)
-
-        if not start == None and end == None:
-            self.cut(self.loaded_data[(self.rate*start):(self.rate*end),:])
-
-
-        if self.cut_data == []:
-            self.lr_separate(self.loaded_data)
-        else:
-            self.lr_separate(self.cut_data)
         
-
-        self.hpss_execute(self.lr_separated_data,l_or_r)
-        self.chromacqt_execute(self.hpss_data,chroma_mode,hop_length,n_octaves,n_chroma)
-        '''
-

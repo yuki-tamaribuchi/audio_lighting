@@ -6,7 +6,7 @@ class Player():
 
     scale=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
-    def __init__(self,audio_data,rate,lighting_data):
+    def __init__(self,audio_data,rate,lighting_data=None):
         self.audio_data=audio_data
         self.rate=rate
         self.lighting_data=lighting_data
@@ -17,7 +17,6 @@ class Player():
         sounddevice.play(self.audio_data,self.rate)
         self.audio_len=len(self.audio_data)/self.rate
         print('Audio Length=',round(self.audio_len),'sec')
-        self.print_array(self.lighting_data)
         time.sleep(self.audio_len)
 
 

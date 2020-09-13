@@ -1,10 +1,10 @@
-from ChromaCqt import ChromaCqt
+from DataProcessing import DataProcessing
 from Player import Player
 import time
 
 #実装サンプル
-cc1=ChromaCqt('file.wav')
+dp1=DataProcessing('file.wav')
 
-pl1=Player(cc1.loaded_data[:,0],cc1.rate,cc1.chroma_array_left)
+pl1=Player(dp1.loaded_data[:,0],dp1.rate,dp1.chroma_array_left)
 pl1.play_w_lightring()
 

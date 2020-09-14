@@ -79,5 +79,4 @@ class DataProcessing():
         
 
         self.brightness_left=self.brightness_left[::4410]
-        print(self.brightness_left.shape)
         

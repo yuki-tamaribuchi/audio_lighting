@@ -8,5 +8,5 @@ class Lighting():
         b.connect()
         self.lights=b.lights
 
-    def brightness(self,data):
-        self.lights[0]=127
+    def brightness(self,data=None):
+        self.lights[0].brightness=127

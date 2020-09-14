@@ -1,6 +1,7 @@
 import numpy as np
 import sounddevice
 import time
+from Lighting import Lighting
 
 class Player():
 
@@ -10,13 +11,15 @@ class Player():
         self.audio_data=audio_data
         self.rate=rate
         self.lighting_data=lighting_data
+        self.lt1=Lighting('192.168.11.11')
 
 
 
-    def play_w_lightring(self):
+    def play_w_lightring(self,data):
         sounddevice.play(self.audio_data,self.rate)
         self.audio_len=len(self.audio_data)/self.rate
         print('Audio Length=',round(self.audio_len),'sec')
+        self.lt1.brightness(data,self.audio_len)
         time.sleep(self.audio_len)
 
 

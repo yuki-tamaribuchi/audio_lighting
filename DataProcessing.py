@@ -7,9 +7,9 @@ import csv
 
 class DataProcessing():
 
+
     loaded_data=[]
     normalized_data=[]
-
     hpss_harmonics_left=[]
     hpss_harmonics_right=[]
     hpss_percussion_left=[]
@@ -19,6 +19,7 @@ class DataProcessing():
     rate=0
     chroma_array_left=[]
     chroma_array_rihgt=[]
+
 
     def __init__(self,file):
         self.load_music(file)
@@ -53,8 +54,6 @@ class DataProcessing():
         plt.show()
 
 
-
-    
     def export_csv(self):
         print('Export Start')
         with open('data.csv','w') as f:

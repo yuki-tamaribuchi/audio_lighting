@@ -72,12 +72,12 @@ class DataProcessing():
     def create_brightness_data(self):
         left_ave=abs(np.average(self.hpss_percussion_left))
         right_ave=abs(np.average(self.hpss_percussion_right))
-
-        print(left_ave)
-        print(right_ave)
         
-
         self.brightness_left=np.where(self.hpss_percussion_left>left_ave,1,0)
         self.brightness_right=np.where(self.hpss_harmonics_right>right_ave,1,0)
 
+        
+
+        self.brightness_left=self.brightness_left[::4410]
+        print(self.brightness_left.shape)
         

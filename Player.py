@@ -11,7 +11,7 @@ class Player():
         self.audio_data=audio_data
         self.rate=rate
         self.lighting_data=lighting_data
-        self.lt1=Lighting('192.168.11.11')
+        #self.lt1=Lighting('192.168.11.11')
 
 
 
@@ -19,7 +19,7 @@ class Player():
         sounddevice.play(self.audio_data,self.rate)
         self.audio_len=len(self.audio_data)/self.rate
         print('Audio Length=',round(self.audio_len),'sec')
-        self.lt1.brightness(data,self.audio_len)
+        #self.lt1.brightness(data,self.audio_len)
         time.sleep(self.audio_len)
 
 

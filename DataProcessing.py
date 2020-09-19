@@ -25,6 +25,7 @@ class DataProcessing():
 
     def __init__(self,file):
         self.load_music(file)
+        self.estimate_bpm()
         self.hpss_execute()
         self.chromacqt_execute()
         self.create_io_array()
@@ -35,6 +36,12 @@ class DataProcessing():
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
         print('Loading End')
+
+    def estimate_bpm(self):
+        print('Estimate BPM Start')
+        self.bpm=librosa.beat.tempo(y=self.normalized_data[:,0])
+        print('Estimate BPM End')
+        print('BPM=',self.bpm)
         
 
     def hpss_execute(self):
@@ -81,5 +88,5 @@ class DataProcessing():
         self.brightness_left=self.brightness_left[::4410]
         
 
-    def create_color_data(self,data):
-        
+    def create_color_data(self):
+        pass

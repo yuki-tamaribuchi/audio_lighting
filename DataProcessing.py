@@ -27,7 +27,7 @@ class DataProcessing():
         self.load_music(file)
         self.estimate_bpm()
         self.hpss_execute()
-        self.chromacqt_execute()
+        self.chromacens_execute()
         self.create_io_array()
 
 
@@ -48,6 +48,7 @@ class DataProcessing():
         print('HPSS Start')
         self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
         self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
+        print('HPSS End')
 
 
     def chromacqt_execute(self,hop_length=2048,n_octaves=2,n_chroma=12):
@@ -56,8 +57,17 @@ class DataProcessing():
         self.chrcqt_right_data=librosa.feature.chroma_cqt(y=self.hpss_harmonics_right,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
         print('Chroma CQT End')
 
+
+    def chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
+        print('Chroma Cens Start')
+        C_left=librosa.cqt(self.hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
+        C_right=librosa.cqt(self.hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
+        self.cens_left=librosa.feature.chroma_cens(C=C_left,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        self.cens_right=librosa.feature.chroma_cens(C=C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        print('Chroma Cens End')
     
-    def disp_chrcqt(self,data,hop_length=2048):
+
+    def disp_chrcqt(self,data,hop_length=4096):
         plt.figure(figsize=(15,5))
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()
@@ -70,7 +80,7 @@ class DataProcessing():
             writer.writerows(self.chrcqt_left_data,self.chrcqt_right_data)
         print('Export End')
 
-
+    
     def create_io_array(self):
         self.chroma_array_left=np.where(self.chrcqt_left_data==1.0,1,0)
         self.chroma_array_left=np.where(self.chrcqt_right_data==1.0,1,0)

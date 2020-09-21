@@ -21,6 +21,10 @@ class DataProcessing():
     chroma_array_right=[]
     brightness_left=[]
     brightness_right=[]
+    color_x_left=[]
+    color_y_left=[]
+    color_x_right=[]
+    color_y_right=[]
 
 
     def __init__(self,file):
@@ -29,6 +33,7 @@ class DataProcessing():
         self.hpss_execute()
         self.chromacens_execute()
         self.create_io_array()
+        self.create_color_data()
 
 
     def load_music(self,file):
@@ -177,34 +182,36 @@ class DataProcessing():
             }
         }
 
-        rgb_left=chroma_rgb[self.chroma_array_left]
-        rgb_right=chroma_rgb[self.chroma_array_right]
+        for c in self.cens_left.T:
+
+            rgb_left=chroma_rgb[c.argmax()]
+            rgb_right=chroma_rgb[c.argmax()]
 
 
-        # gamma correction
-        red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
-        green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
-        blue_left =  pow(((rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['B']/256) > 0.04045 else ((rgb_left['B']/256) / 12.92)
+            # gamma correction
+            red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
+            green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
+            blue_left =  pow(((rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['B']/256) > 0.04045 else ((rgb_left['B']/256) / 12.92)
 
-        red_right = pow(((rgb_right['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['R']/256) > 0.04045 else ((rgb_right['R']/256) / 12.92)
-        green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
-        blue_right =  pow(((rgb_right['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['B']/256) > 0.04045 else ((rgb_right['B']/256) / 12.92)
-
-
-        # convert rgb to xyz
-        x_left = red_left * 0.649926 + green_left * 0.103455 + blue_left * 0.197109
-        y_left = red_left * 0.234327 + green_left * 0.743075 + blue_left * 0.022598
-        z_left = green_left * 0.053077 + blue_left * 1.035763
-
-        x_right = red_right * 0.649926 + green_right * 0.103455 + blue_right * 0.197109
-        y_right = red_right * 0.234327 + green_right * 0.743075 + blue_right * 0.022598
-        z_right = green_right * 0.053077 + blue_right * 1.035763
+            red_right = pow(((rgb_right['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['R']/256) > 0.04045 else ((rgb_right['R']/256) / 12.92)
+            green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
+            blue_right =  pow(((rgb_right['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['B']/256) > 0.04045 else ((rgb_right['B']/256) / 12.92)
 
 
-        # convert xyz to xy
-        self.x_left = x_left / (x_left + y_left + z_left)
-        self.y_left = y_left / (x_left + y_left + z_left)
-        
-        self.x_right = x_right / (x_right + y_right + z_right)
-        self.y_right = y_right / (x_right + y_right + z_right)
-    
+            # convert rgb to xyz
+            x_left = red_left * 0.649926 + green_left * 0.103455 + blue_left * 0.197109
+            y_left = red_left * 0.234327 + green_left * 0.743075 + blue_left * 0.022598
+            z_left = green_left * 0.053077 + blue_left * 1.035763
+
+            x_right = red_right * 0.649926 + green_right * 0.103455 + blue_right * 0.197109
+            y_right = red_right * 0.234327 + green_right * 0.743075 + blue_right * 0.022598
+            z_right = green_right * 0.053077 + blue_right * 1.035763
+
+
+            # convert xyz to xy
+            self.color_x_left = x_left / (x_left + y_left + z_left)
+            self.color_y_left = y_left / (x_left + y_left + z_left)
+
+            self.color_x_right.append(x_right / (x_right + y_right + z_right))
+            self.color_y_right.append(y_right / (x_right + y_right + z_right))
+            

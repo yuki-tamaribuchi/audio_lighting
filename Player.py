@@ -5,14 +5,12 @@ from Lighting import Lighting
 
 class Player():
 
-    scale=['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
 
     def __init__(self,audio_data,rate,lighting_data=None):
         self.audio_data=audio_data
         self.rate=rate
         self.lighting_data=lighting_data
         #self.lt1=Lighting('192.168.11.11')
-
 
 
     def play_w_lightring(self,data):

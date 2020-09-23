@@ -12,20 +12,23 @@ class Lighting():
 
     def brightness(self,data,audio_len):
         data_length=len(data)
-        print(data_length)
         interval=audio_len/data_length
         print(interval)
         for i in range(0,data_length):
+            start=time.time()
             #self.lights[0].brightness=127+(int(data[i])*30)
             print(data[i])
-            time.sleep(interval)
+            end=time.time()
+            time.sleep(interval-(end-start))
 
     
     def color(self,data,audio_len):
         data_length=len(data)
-        print(data_length)
         interval=audio_len/data_length
+        print(interval)
         for i in range(0,data_length):
+            start=time.time()
             #self.b.set_light(1,'color',data[i])
             print(data[i])
-            time.sleep(interval)
+            end=time.time()
+            time.sleep(interval-(end-start))

@@ -4,10 +4,11 @@ import time
 class Lighting():
 
     def __init__(self,ip_addr):
-        b=Bridge(ip_addr)
-        b.connect()
-        self.lights=b.lights
-        self.lights[0].brightness=127
+        self.b=Bridge(ip_addr)
+        self.b.connect()
+        #self.lights=b.lights
+        #self.lights[0].brightness=127
+
 
     def brightness(self,data,audio_len):
         data_length=len(data)
@@ -15,6 +16,14 @@ class Lighting():
         interval=audio_len/data_length
         print(interval)
         for i in range(0,data_length):
-            self.lights[0].brightness=127+(int(data[i])*30)
+            #self.lights[0].brightness=127+(int(data[i])*30)
             print(data[i])
             time.sleep(interval)
+
+    
+    def color(self,data,audio_len):
+        data_length=len(data)
+        print(data_length)
+        interval=
+        for i in range(0,data_length):
+            self.b.set_light(1,'color',data[i])

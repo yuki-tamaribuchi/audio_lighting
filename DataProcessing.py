@@ -32,7 +32,7 @@ class DataProcessing():
         self.estimate_bpm()
         self.hpss_execute()
         self.chromacens_execute()
-        self.create_io_array()
+        #self.create_io_array()
         self.create_color_data()
 
 
@@ -204,8 +204,8 @@ class DataProcessing():
             z_right = green_right * 0.053077 + blue_right * 1.035763
 
             # convert xyz to xy
-            self.color_x_left = x_left / (x_left + y_left + z_left)
-            self.color_y_left = y_left / (x_left + y_left + z_left)
+            self.color_x_left.append(x_left / (x_left + y_left + z_left))
+            self.color_y_left.append(y_left / (x_left + y_left + z_left))
 
             self.color_x_right.append(x_right / (x_right + y_right + z_right))
             self.color_y_right.append(y_right / (x_right + y_right + z_right))

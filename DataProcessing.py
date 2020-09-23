@@ -42,6 +42,7 @@ class DataProcessing():
         self.normalized_data=self.loaded_data/32768
         print('Loading End')
 
+
     def estimate_bpm(self):
         print('Estimate BPM Start')
         self.bpm=librosa.beat.tempo(y=self.normalized_data[:,0])
@@ -98,15 +99,12 @@ class DataProcessing():
         self.brightness_left=np.where(self.hpss_percussion_left>left_ave,1,0)
         self.brightness_right=np.where(self.hpss_harmonics_right>right_ave,1,0)
 
-        
-
         self.brightness_left=self.brightness_left[::4410]
         
 
     def create_color_data(self):
 
         #convert sRGB to CIE1931 XY
-
         chroma_rgb={
             #C
             0:{
@@ -187,7 +185,6 @@ class DataProcessing():
             rgb_left=chroma_rgb[c.argmax()]
             rgb_right=chroma_rgb[c.argmax()]
 
-
             # gamma correction
             red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
             green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
@@ -197,7 +194,6 @@ class DataProcessing():
             green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
             blue_right =  pow(((rgb_right['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['B']/256) > 0.04045 else ((rgb_right['B']/256) / 12.92)
 
-
             # convert rgb to xyz
             x_left = red_left * 0.649926 + green_left * 0.103455 + blue_left * 0.197109
             y_left = red_left * 0.234327 + green_left * 0.743075 + blue_left * 0.022598
@@ -206,7 +202,6 @@ class DataProcessing():
             x_right = red_right * 0.649926 + green_right * 0.103455 + blue_right * 0.197109
             y_right = red_right * 0.234327 + green_right * 0.743075 + blue_right * 0.022598
             z_right = green_right * 0.053077 + blue_right * 1.035763
-
 
             # convert xyz to xy
             self.color_x_left = x_left / (x_left + y_left + z_left)

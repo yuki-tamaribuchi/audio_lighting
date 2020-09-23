@@ -8,6 +8,4 @@ dp1=DataProcessing('file.wav')
 dp1.create_brightness_data()
 
 pl1=Player(dp1.loaded_data[:,0],dp1.rate,dp1.chroma_array_left)
-print(dp1.color_x_left)
-print(type(dp1.color_x_left))
 pl1.play_w_lightring(brightness_data=dp1.brightness_left,color_data=dp1.color_x_left)

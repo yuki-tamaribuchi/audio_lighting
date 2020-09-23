@@ -17,7 +17,7 @@ class Player():
         sounddevice.play(self.audio_data,self.rate)
         self.audio_len=len(self.audio_data)/self.rate
         print('Audio Length=',round(self.audio_len),'sec')
-        #self.lt1.brightness(brightness_data,self.audio_len)
+        self.lt1.brightness(brightness_data,self.audio_len)
         self.lt1.color(color_data,self.audio_len)
         time.sleep(self.audio_len)
 

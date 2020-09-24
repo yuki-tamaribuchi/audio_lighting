@@ -23,10 +23,7 @@ class DataProcessing():
     chroma_array_right=[]
     brightness_left=[]
     brightness_right=[]
-    color_x_left=[]
-    color_y_left=[]
-    color_x_right=[]
-    color_y_right=[]
+
 
     color_array=[[],[],[],[]]
 
@@ -207,6 +204,11 @@ class DataProcessing():
             }
         }
 
+        color_x_left=[]
+        color_y_left=[]
+        color_x_right=[]
+        color_y_right=[]
+
         for c in self.cens_left.T:
 
             rgb_left=chroma_rgb[c.argmax()]
@@ -231,17 +233,17 @@ class DataProcessing():
             z_right = green_right * 0.053077 + blue_right * 1.035763
 
             # convert xyz to xy
-            self.color_x_left.append(x_left / (x_left + y_left + z_left))
-            self.color_y_left.append(y_left / (x_left + y_left + z_left))
+            color_x_left.append(x_left / (x_left + y_left + z_left))
+            color_y_left.append(y_left / (x_left + y_left + z_left))
 
-            self.color_x_right.append(x_right / (x_right + y_right + z_right))
-            self.color_y_right.append(y_right / (x_right + y_right + z_right))
+            color_x_right.append(x_right / (x_right + y_right + z_right))
+            color_y_right.append(y_right / (x_right + y_right + z_right))
 
 
-            self.color_array[0]=self.color_x_left
-            self.color_array[1]=self.color_x_right
-            self.color_array[2]=self.color_y_left
-            self.color_array[3]=self.color_y_right
+            self.color_array[0]=color_x_left
+            self.color_array[1]=color_x_right
+            self.color_array[2]=color_y_left
+            self.color_array[3]=color_y_right
             
 
             

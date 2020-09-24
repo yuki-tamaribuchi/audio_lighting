@@ -4,7 +4,8 @@ import time
 
 #実装サンプル
 
-dp1=DataProcessing('file.wav')
+#audio->'a',video->'v'
+dp1=DataProcessing('file.wav','a')
 dp1.create_brightness_data()
 
 pl1=Player(dp1.loaded_data[:,0],dp1.rate,dp1.chroma_array_left)

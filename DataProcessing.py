@@ -28,6 +28,8 @@ class DataProcessing():
     color_x_right=[]
     color_y_right=[]
 
+    color_array=[]
+
 
     def __init__(self,file,mode):
 
@@ -234,4 +236,6 @@ class DataProcessing():
 
             self.color_x_right.append(x_right / (x_right + y_right + z_right))
             self.color_y_right.append(y_right / (x_right + y_right + z_right))
+            
+
             

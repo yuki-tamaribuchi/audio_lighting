@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ff4c78adc847b4a3a858ad811e95fd1311c304a77ae260cda8612c2bfad574f1"
+            "sha256": "a119e840d22f553d97cb0013252ca14c26d131ad08850ddb19ef3489bac519d0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -416,6 +416,14 @@
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==2.8.1"
         },
+        "python-vlc": {
+            "hashes": [
+                "sha256:508bc5b4b4fd72b4e23c926795bdcd38c7c1c08a4dd6b8cc87b0abd1d7118aa1",
+                "sha256:a4d3bdddfce84a8fb1b2d5447193a0239c55c16ca246e5194d48efd59c4e236b"
+            ],
+            "index": "pypi",
+            "version": "==3.0.11115"
+        },
         "requests": {
             "hashes": [
                 "sha256:b3559a131db72c33ee969480840fff4bb6dd111de7dd27c8ee1f820f4f00231b",
@@ -531,7 +539,7 @@
                 "sha256:91056c15fa70756691db97756772bb1eb9678fa585d9184f24534b100dc60f4a",
                 "sha256:e7983572181f5e1522d9c98453462384ee92a0be7fac5f1413a1e35c56cc0461"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4' and python_version < '4.0'",
             "version": "==1.25.10"
         },
         "wrapt": {

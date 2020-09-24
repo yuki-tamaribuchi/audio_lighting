@@ -28,13 +28,25 @@ class DataProcessing():
     color_y_right=[]
 
 
-    def __init__(self,file):
-        self.load_music(file)
-        self.estimate_bpm()
-        self.hpss_execute()
-        self.chromacens_execute()
-        #self.create_io_array()
-        self.create_color_data()
+    def __init__(self,file,mode):
+
+        if mode=='a':
+            self.load_music(file)
+            self.estimate_bpm()
+            self.hpss_execute()
+            self.chromacens_execute()
+            #self.create_io_array()
+            self.create_color_data()
+        elif mode=='v':
+            self.load_audio_from_video(file)
+            self.estimate_bpm()
+            self.hpss_execute()
+            self.chromacens_execute()
+            #self.create_io_array()
+            self.create_color_data()
+        else:
+            print('モードを"a"，または"v"で指定してください')
+
 
 
     def load_music(self,file):

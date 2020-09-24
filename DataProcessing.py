@@ -4,6 +4,7 @@ import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
 import csv
+from moviepy.video.io.VideoFileClip import VideoFileClip
 
 class DataProcessing():
 
@@ -44,7 +45,12 @@ class DataProcessing():
 
 
     def load_audio_from_video(self,file):
-        pass
+        print('Loading Start')
+        video_data=VideoFileClip(file)
+        audio_data=video_data.audio
+        self.normalized_data=audio_data.to_soundarray()
+        self.rate=44100
+        print('Loading End')
 
 
     def estimate_bpm(self):

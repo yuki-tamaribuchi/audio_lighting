@@ -2,23 +2,26 @@ import numpy as np
 import sounddevice
 import time
 from Lighting import Lighting
+import vlc
 
 class Player():
 
 
-    def __init__(self,audio_data,rate,lighting_data=None):
-        self.audio_data=audio_data
-        self.rate=rate
-        self.lighting_data=lighting_data
+    def __init__(self,file,audio_len,color_data=None,brightness_data=None):
         self.lt1=Lighting('192.168.11.99')
+        self.color_data=color_data
+        self.brightness_data=brightness_data
+        self.audio_len=audio_len
+        self.p=vlc.MediaPlayer()
+        self.p.set_mrl(file)
 
 
-    def play_w_lightring(self,brightness_data,color_data):
-        sounddevice.play(self.audio_data,self.rate)
-        self.audio_len=len(self.audio_data)/self.rate
+    def play_w_lightring(self):
+
+        self.p.play()
         print('Audio Length=',round(self.audio_len),'sec')
-        self.lt1.brightness(brightness_data,self.audio_len)
-        self.lt1.color(color_data,self.audio_len)
+        #self.lt1.brightness(self.brightness_data,self.audio_len)
+        self.lt1.color(data=self.color_data,audio_len=self.audio_len)
         time.sleep(self.audio_len)
 
 

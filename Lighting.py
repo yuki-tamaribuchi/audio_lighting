@@ -30,6 +30,6 @@ class Lighting():
         for i in range(0,data_length):
             start=time.time()
             #self.b.set_light(1,'color',data[i])
-            print(data[0][i],data[1][i])
+            print('left x=',data[0][i],'left y=',data[2][i],',right x=',data[1][i],',right y=',data[3][i])
             end=time.time()
             time.sleep(interval-(end-start))

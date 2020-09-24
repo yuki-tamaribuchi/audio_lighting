@@ -23,12 +23,13 @@ class Lighting():
 
     
     def color(self,data,audio_len):
-        data_length=len(data)
+        data_length=len(data[0])
+        print(data_length)
         interval=audio_len/data_length
-        print(interval)
+        print('interval=',interval,'sec')
         for i in range(0,data_length):
             start=time.time()
             #self.b.set_light(1,'color',data[i])
-            print(data[i])
+            print(data[0][i],data[1][i])
             end=time.time()
             time.sleep(interval-(end-start))

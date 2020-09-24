@@ -18,6 +18,7 @@ class DataProcessing():
     chrcqt_left_data=[]
     chrcqt_right_data=[]
     rate=0
+    audio_time_length=0
     chroma_array_left=[]
     chroma_array_right=[]
     brightness_left=[]
@@ -53,6 +54,7 @@ class DataProcessing():
         print('Loading Start')
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
+        self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
 
@@ -62,6 +64,7 @@ class DataProcessing():
         audio_data=video_data.audio
         self.normalized_data=audio_data.to_soundarray()
         self.rate=44100
+        self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
 

@@ -7,11 +7,11 @@ import vlc
 class Player():
 
 
-    def __init__(self,file,audio_len,color_data=None,brightness_data=None):
+    def __init__(self,file,audio_time_length,color_data=None,brightness_data=None):
         self.lt1=Lighting('192.168.11.99')
         self.color_data=color_data
         self.brightness_data=brightness_data
-        self.audio_len=audio_len
+        self.audio_time_length=audio_time_length
         self.p=vlc.MediaPlayer()
         self.p.set_mrl(file)
 
@@ -19,16 +19,16 @@ class Player():
     def play_w_lightring(self):
 
         self.p.play()
-        print('Audio Length=',round(self.audio_len),'sec')
-        #self.lt1.brightness(self.brightness_data,self.audio_len)
-        self.lt1.color(data=self.color_data,audio_len=self.audio_len)
-        time.sleep(self.audio_len)
+        print('Audio Length=',round(self.audio_time_length),'sec')
+        #self.lt1.brightness(self.brightness_data,self.audio_time_length)
+        self.lt1.color(data=self.color_data,audio_len=self.audio_time_length)
+        time.sleep(self.audio_time_length)
 
 
     def print_array(self,lighting_data):
         array_len=len(lighting_data['left'][0])
         print(array_len)
-        interval=1/(array_len/self.audio_len)
+        interval=1/(array_len/self.audio_time_length)
 
         print(interval)
 

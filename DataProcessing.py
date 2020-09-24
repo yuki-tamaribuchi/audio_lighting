@@ -43,6 +43,10 @@ class DataProcessing():
         print('Loading End')
 
 
+    def load_audio_from_video(self,file):
+        pass
+
+
     def estimate_bpm(self):
         print('Estimate BPM Start')
         self.bpm=librosa.beat.tempo(y=self.normalized_data[:,0])

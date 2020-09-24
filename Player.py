@@ -27,7 +27,6 @@ class Player():
 
     def print_array(self,lighting_data):
         array_len=len(lighting_data['left'][0])
-        print(array_len)
         interval=1/(array_len/self.audio_time_length)
 
         print(interval)

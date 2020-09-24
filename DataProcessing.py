@@ -240,10 +240,10 @@ class DataProcessing():
             color_y_right.append(y_right / (x_right + y_right + z_right))
 
 
-            self.color_array[0]=color_x_left
-            self.color_array[1]=color_x_right
-            self.color_array[2]=color_y_left
-            self.color_array[3]=color_y_right
+        self.color_array[0]=color_x_left
+        self.color_array[1]=color_x_right
+        self.color_array[2]=color_y_left
+        self.color_array[3]=color_y_right
             
 
             

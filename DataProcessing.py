@@ -6,6 +6,7 @@ from scipy.io import wavfile
 import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
+import os
 
 class DataProcessing():
 
@@ -36,6 +37,7 @@ class DataProcessing():
             if self.check_temp():
                 self.load_color_data_from_csv()
             else:
+                self.dump_audio_array_length()
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
@@ -47,6 +49,7 @@ class DataProcessing():
             if self.check_temp():
                 self.load_color_data_from_csv()
             else:    
+                self.dump_audio_array_length
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
@@ -62,7 +65,7 @@ class DataProcessing():
         print('Loading Start')
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
-        self.dump_audio_array_length()
+        #self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
@@ -73,7 +76,7 @@ class DataProcessing():
         audio_data=video_data.audio
         self.normalized_data=audio_data.to_soundarray()
         self.rate=44100
-        self.dump_audio_array_length()
+        #self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
@@ -119,6 +122,8 @@ class DataProcessing():
             json.dump(d,f)
 
     def check_temp(self):
+        if not os.path.isfile('temp.json'):
+            return False
         with open('temp.json','r') as f:
             temp_data=json.load(f)
             print(temp_data['length']==len(self.normalized_data))

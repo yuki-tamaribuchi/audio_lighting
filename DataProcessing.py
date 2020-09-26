@@ -49,7 +49,7 @@ class DataProcessing():
             if self.check_temp():
                 self.load_color_data_from_csv()
             else:    
-                self.dump_audio_array_length
+                self.dump_audio_array_length()
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()

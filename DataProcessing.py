@@ -5,6 +5,7 @@ from matplotlib import pyplot as plt
 from scipy.io import wavfile
 import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
+import json
 
 class DataProcessing():
 
@@ -55,6 +56,7 @@ class DataProcessing():
         print('Loading Start')
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
+        self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
@@ -65,6 +67,7 @@ class DataProcessing():
         audio_data=video_data.audio
         self.normalized_data=audio_data.to_soundarray()
         self.rate=44100
+        self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
 
@@ -103,6 +106,11 @@ class DataProcessing():
         plt.figure(figsize=(15,5))
         librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
         plt.show()
+
+    def dump_audio_array_length(self):
+        d={'length':len(self.normalized_data)}
+        with open('temp.json','w') as f:
+            json.dump(d,f)
 
 
     def export_csv(self):

@@ -33,20 +33,26 @@ class DataProcessing():
 
         if mode=='a':
             self.load_music(file)
-            self.estimate_bpm()
-            self.hpss_execute()
-            self.chromacens_execute()
-            #self.create_io_array()
-            self.create_color_data()
-            self.save_color_data()
+            if self.check_temp():
+                self.load_color_data_from_csv()
+            else:
+                self.estimate_bpm()
+                self.hpss_execute()
+                self.chromacens_execute()
+                #self.create_io_array()
+                self.create_color_data()
+                self.save_color_data()
         elif mode=='v':
             self.load_audio_from_video(file)
-            self.estimate_bpm()
-            self.hpss_execute()
-            self.chromacens_execute()
-            #self.create_io_array()
-            self.create_color_data()
-            self.save_color_data()
+            if self.check_temp():
+                self.load_color_data_from_csv()
+            else:    
+                self.estimate_bpm()
+                self.hpss_execute()
+                self.chromacens_execute()
+                #self.create_io_array()
+                self.create_color_data()
+                self.save_color_data()
         else:
             print('モードを"a"，または"v"で指定してください')
 
@@ -111,6 +117,13 @@ class DataProcessing():
         d={'length':len(self.normalized_data)}
         with open('temp.json','w') as f:
             json.dump(d,f)
+
+    def check_temp(self):
+        with open('temp.json','r') as f:
+            temp_data=json.load(f)
+            print(temp_data['length']==len(self.normalized_data))
+            return temp_data['length']==len(self.normalized_data)
+                
 
 
     def export_csv(self):
@@ -262,5 +275,12 @@ class DataProcessing():
         self.color_array[2]=color_y_left
         self.color_array[3]=color_y_right
             
-
+    def load_color_data_from_csv(self):
+        with open('color.csv','r') as f:
+            reader=csv.reader(f)
+            print(reader)
+            i=0
+            for row in reader:
+                self.color_array[i]=row
+                i+=1
             

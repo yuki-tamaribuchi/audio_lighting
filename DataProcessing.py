@@ -37,6 +37,7 @@ class DataProcessing():
             self.chromacens_execute()
             #self.create_io_array()
             self.create_color_data()
+            self.save_color_data()
         elif mode=='v':
             self.load_audio_from_video(file)
             self.estimate_bpm()
@@ -44,6 +45,7 @@ class DataProcessing():
             self.chromacens_execute()
             #self.create_io_array()
             self.create_color_data()
+            self.save_color_data()
         else:
             print('モードを"a"，または"v"で指定してください')
 
@@ -109,6 +111,13 @@ class DataProcessing():
             writer=csv.writer(f)
             writer.writerows(self.chrcqt_left_data,self.chrcqt_right_data)
         print('Export End')
+
+    def save_color_data(self):
+        print('Save Color Data Start')
+        with open('color.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.color_array)
+        print('Save Color Data End')
 
     
     def create_io_array(self):

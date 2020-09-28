@@ -146,19 +146,7 @@ class DataProcessing():
         print('Save Color Data End')
 
     
-    def create_io_array(self):
-        self.chroma_array_left=np.where(self.chrcqt_left_data==1.0,1,0)
-        self.chroma_array_left=np.where(self.chrcqt_right_data==1.0,1,0)
 
-
-    def create_brightness_data(self):
-        left_ave=abs(np.average(self.hpss_percussion_left))
-        right_ave=abs(np.average(self.hpss_percussion_right))
-        
-        self.brightness_left=np.where(self.hpss_percussion_left>left_ave,1,0)
-        self.brightness_right=np.where(self.hpss_harmonics_right>right_ave,1,0)
-
-        self.brightness_left=self.brightness_left[::4410]
         
 
     def create_color_data(self):

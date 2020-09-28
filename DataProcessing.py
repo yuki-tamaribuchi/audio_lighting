@@ -152,11 +152,13 @@ class DataProcessing():
         resample_size=int((self.audio_time_length/60)*2000)
         print('Resample Size=',resample_size)
         print('S/L=',self.audio_time_length/resample_size)
-        self.left_percussion_rs=resample(abs(self.hpss_percussion_left),resample_size)
-        self.right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
-
+        left_percussion_rs=resample(abs(self.hpss_percussion_left),resample_size)
+        right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
+        left_max=left_percussion_rs.max()
+        right_max=right_percussion_rs.max()
+        self.brightness_left=left_percussion_rs/left_max
+        self.brightness_right=right_percussion_rs/right_max
         print('Create Brightness data End')
-
 
 
     def create_color_data(self):

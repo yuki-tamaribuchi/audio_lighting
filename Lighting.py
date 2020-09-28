@@ -10,10 +10,10 @@ class Lighting():
         self.lights[2].brightness=127
 
 
-    def brightness(self,data,audio_len):
+    def brightness(self,data,audio_time_length):
         data_length=len(data)
-        interval=audio_len/data_length
-        print(interval)
+        interval=audio_time_length/data_length
+        print('Brightness Interval=',interval)
         for i in range(0,data_length):
             start=time.time()
             #self.lights[0].brightness=127+(int(data[i])*30)

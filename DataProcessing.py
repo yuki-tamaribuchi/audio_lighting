@@ -146,7 +146,13 @@ class DataProcessing():
         print('Save Color Data End')
 
     
+    def create_brightness_data(self):
+        left_percussion_db=librosa.feature.power_to_db(self.hpss_percussion_left)
+        right_percussion_db=librosa.feature.power_to_db(self.hpss_percussion_right)
 
+        
+
+        
         
 
     def create_color_data(self):

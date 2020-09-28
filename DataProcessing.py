@@ -3,6 +3,7 @@ import librosa
 import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
+from scipy.signal import resample
 import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
@@ -41,7 +42,7 @@ class DataProcessing():
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
-                #self.create_io_array()
+                self.create_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         elif mode=='v':
@@ -53,7 +54,7 @@ class DataProcessing():
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
-                #self.create_io_array()
+                self.create_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         else:
@@ -146,20 +147,19 @@ class DataProcessing():
         print('Save Color Data End')
 
     
-    def create_io_array(self):
-        self.chroma_array_left=np.where(self.chrcqt_left_data==1.0,1,0)
-        self.chroma_array_left=np.where(self.chrcqt_right_data==1.0,1,0)
-
-
     def create_brightness_data(self):
-        left_ave=abs(np.average(self.hpss_percussion_left))
-        right_ave=abs(np.average(self.hpss_percussion_right))
-        
-        self.brightness_left=np.where(self.hpss_percussion_left>left_ave,1,0)
-        self.brightness_right=np.where(self.hpss_harmonics_right>right_ave,1,0)
+        print('Create Brightness data Start')
+        resample_size=int((self.audio_time_length/60)*2000)
+        print('Resample Size=',resample_size)
+        print('S/L=',self.audio_time_length/resample_size)
+        left_percussion_rs=resample(abs(self.hpss_percussion_left),resample_size)
+        right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
+        left_max=left_percussion_rs.max()
+        right_max=right_percussion_rs.max()
+        self.brightness_left=left_percussion_rs/left_max
+        self.brightness_right=right_percussion_rs/right_max
+        print('Create Brightness data End')
 
-        self.brightness_left=self.brightness_left[::4410]
-        
 
     def create_color_data(self):
 

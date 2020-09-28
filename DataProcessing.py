@@ -152,8 +152,8 @@ class DataProcessing():
         resample_size=int((self.audio_time_length/60)*1000)
         print('Resample Size=',resample_size)
         print('S/L=',self.audio_time_length/resample_size)
-        left_percussion_rs=resample(self.hpss_percussion_left,resample_size)
-        right_percussion_rs=resample(self.hpss_percussion_right,resample_size)
+        left_percussion_rs=resample(abs(self.hpss_percussion_left),resample_size)
+        right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
 
         print('Create Brightness data End')
 

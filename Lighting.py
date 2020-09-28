@@ -7,7 +7,7 @@ class Lighting():
         self.b=Bridge(ip_addr)
         self.b.connect()
         self.lights=self.b.lights
-        #self.lights[0].brightness=127
+        self.lights[2].brightness=127
 
 
     def brightness(self,data,audio_len):

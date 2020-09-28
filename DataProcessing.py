@@ -3,6 +3,7 @@ import librosa
 import librosa.display
 from matplotlib import pyplot as plt
 from scipy.io import wavfile
+from scipy.signal import resample
 import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
@@ -41,7 +42,7 @@ class DataProcessing():
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
-                #self.create_io_array()
+                self.create_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         elif mode=='v':
@@ -53,7 +54,7 @@ class DataProcessing():
                 self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
-                #self.create_io_array()
+                self.create_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         else:
@@ -147,10 +148,14 @@ class DataProcessing():
 
     
     def create_brightness_data(self):
-        left_percussion_db=librosa.feature.power_to_db(self.hpss_percussion_left)
-        right_percussion_db=librosa.feature.power_to_db(self.hpss_percussion_right)
+        print('Create Brightness data Start')
+        resample_size=int((self.audio_time_length/60)*1000)
+        print('Resample Size=',resample_size)
+        print('S/L=',self.audio_time_length/resample_size)
+        left_percussion_db_rs=resample(librosa.core.power_to_db(self.hpss_percussion_left),resample_size)
+        right_percussion_db_rs=resample(librosa.core.power_to_db(self.hpss_percussion_right),resample_size)
 
-        
+        print('Create Brightness data End')
 
         
         

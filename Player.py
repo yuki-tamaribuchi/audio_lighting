@@ -3,6 +3,7 @@ import sounddevice
 import time
 from Lighting import Lighting
 import vlc
+import asyncio
 
 class Player():
 
@@ -20,9 +21,19 @@ class Player():
 
         self.p.play()
         print('Audio Length=',round(self.audio_time_length),'sec')
-        #self.lt1.brightness(self.brightness_data,self.audio_time_length)
-        self.lt1.color(data=self.color_data,audio_len=self.audio_time_length)
+        asyncio.run(self.lighting())
         time.sleep(self.audio_time_length)
+
+
+    async def lighting(self):
+        task_brightness=asyncio.create_task(
+            self.lt1.brightness(data=self.brightness_data,audio_time_length=self.audio_time_length)
+        )
+        task_color=asyncio.create_task(
+            self.lt1.color(data=self.color_data,audio_len=self.audio_time_length)
+        )
+        await task_brightness
+        await task_color
 
 
     def print_array(self,lighting_data):

@@ -17,8 +17,14 @@ class Lighting():
         for i in range(0,data_length):
             start=time.time()
             #self.lights[0].brightness=127+(int(data[i])*30)
+            cmd={
+                'bri':127+int(100*data[i]),
+                'transitiontime':0,
+            }
+            self.b.set_light(3,cmd)
             print(data[i])
             end=time.time()
+            print(i,',Sleep time=',interval-(end-start))
             time.sleep(interval-(end-start))
 
     

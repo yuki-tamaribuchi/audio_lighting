@@ -162,7 +162,7 @@ class DataProcessing():
 
 
     def create_color_data(self):
-
+        print('Create Color Data Start')
         #convert sRGB to CIE1931 XY
         chroma_rgb={
             #C
@@ -279,13 +279,15 @@ class DataProcessing():
         self.color_array[1]=color_x_right
         self.color_array[2]=color_y_left
         self.color_array[3]=color_y_right
+        print('Create Color Data End')
             
     def load_color_data_from_csv(self):
+        print('Load Color Data from CSV Start')
         with open('color.csv','r') as f:
             reader=csv.reader(f)
-            print(reader)
             i=0
             for row in reader:
                 self.color_array[i]=row
                 i+=1
+        print('Load Color Data from CSV End')
             

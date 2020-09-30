@@ -146,6 +146,14 @@ class DataProcessing():
             writer.writerows(self.color_array)
         print('Save Color Data End')
 
+
+    def save_brightness_data(self):
+        print('Save Brightness Data Start')
+        with open('brightness.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.brightness)
+        print('Save Brightness Data End')
+
     
     def create_brightness_data(self):
         print('Create Brightness data Start')

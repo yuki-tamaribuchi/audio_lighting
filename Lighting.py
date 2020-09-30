@@ -1,5 +1,6 @@
 from phue import Bridge
 import time
+from scipy.signal import resample
 
 class Lighting():
 

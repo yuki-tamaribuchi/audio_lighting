@@ -18,7 +18,8 @@ class Lighting():
             start=time.time()
             #self.lights[0].brightness=127+(int(data[i])*30)
             cmd={
-                'bri':int(255*data[i]),
+                #一時的にleftを割り当て
+                'bri':int(255*data[0][i]),
                 'transitiontime':0,
             }
             self.b.set_light(3,cmd)

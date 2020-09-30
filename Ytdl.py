@@ -2,4 +2,6 @@ from pytube import YouTube
 
 
 class Ytdl():
-    pass
+    
+    def __init__(self,url):
+        pass

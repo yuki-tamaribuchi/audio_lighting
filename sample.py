@@ -5,7 +5,7 @@ import time
 
 #実装サンプル
 
-file='mirrors.mp4'
+file='media_file/file.mp4'
 
 #audio->'a',video->'v'
 dp1=DataProcessing(file,'v')

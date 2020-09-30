@@ -8,7 +8,7 @@ import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
 import os
-import cv2
+from cv2 import cv2
 from PIL import Image
 
 class DataProcessing():
@@ -176,7 +176,7 @@ class DataProcessing():
         print('Create Brightness data End')
 
 
-    def calc_brightness_from_video(self):
+    def calc_brightness_from_video(self,file):
         pass
 
 

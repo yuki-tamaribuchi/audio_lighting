@@ -14,18 +14,22 @@ class Lighting():
         data_length=len(data[0])
         interval=audio_time_length/data_length
         print('Brightness Interval=',interval)
-        for i in range(0,data_length):
-            start=time.time()
-            #self.lights[0].brightness=127+(int(data[i])*30)
-            cmd={
-                #一時的にleftを割り当て
-                'bri':int(255*data[0][i]),
-                'transitiontime':0,
-            }
-            self.b.set_light(3,cmd)
-            print(data[0][i])
-            end=time.time()
-            time.sleep(interval-(end-start))
+
+        if data_v:
+            pass
+        else:
+            for i in range(0,data_length):
+                start=time.time()
+                #self.lights[0].brightness=127+(int(data[i])*30)
+                cmd={
+                    #一時的にleftを割り当て
+                    'bri':int(255*data[0][i]),
+                    'transitiontime':0,
+                }
+                self.b.set_light(3,cmd)
+                print(data[0][i])
+                end=time.time()
+                time.sleep(interval-(end-start))
 
     
     def color(self,data,audio_len):

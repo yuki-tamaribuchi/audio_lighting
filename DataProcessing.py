@@ -353,4 +353,8 @@ class DataProcessing():
                 self.brightness[i]=[float(s) for s in row]
                 i+=1
         print('Load Brightness Data from CSV End')
+
+    def load_brightness_data_from_video_from_csv(self):
+        print('Load Brightness Data from Video from CSV Start')
+        print('Load Brightness Data from Video from CSV Start')
             

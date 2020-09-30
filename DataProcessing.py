@@ -177,7 +177,8 @@ class DataProcessing():
 
 
     def calc_brightness_from_video(self,file):
-        pass
+        vidcap=cv2.VideoCapture(file)
+        print(vidcap)
 
 
     def create_color_data(self):

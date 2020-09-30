@@ -37,6 +37,7 @@ class DataProcessing():
             self.load_music(file)
             if self.check_temp():
                 self.load_color_data_from_csv()
+                self.load_brightness_data_from_csv()
             else:
                 self.dump_audio_array_length()
                 self.estimate_bpm()
@@ -50,6 +51,7 @@ class DataProcessing():
             self.load_audio_from_video(file)
             if self.check_temp():
                 self.load_color_data_from_csv()
+                self.load_brightness_data_from_csv()
             else:    
                 self.dump_audio_array_length()
                 self.estimate_bpm()
@@ -295,10 +297,21 @@ class DataProcessing():
     def load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')
         with open('color.csv','r') as f:
-            reader=csv.reader(f)
+            reader=csv.reader(f,delimiter=',')
             i=0
             for row in reader:
-                self.color_array[i]=row
+                self.color_array[i]=[float(s) for s in row]
                 i+=1
         print('Load Color Data from CSV End')
+
+
+    def load_brightness_data_from_csv(self):
+        print('Load Brightness Data from CSV Start')
+        with open('brightness.csv','r') as f:
+            reader=csv.reader(f,delimiter=',')
+            i=0
+            for row in reader:
+                self.brightness[i]=[float(s) for s in row]
+                i+=1
+        print('Load Brightness Data from CSV End')
             

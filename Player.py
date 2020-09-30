@@ -8,7 +8,7 @@ from multiprocessing import Process
 class Player():
 
 
-    def __init__(self,file,audio_time_length,color_data=None,brightness_data=None):
+    def __init__(self,file,audio_time_length,color_data=None,brightness_data=None,brightness_v_data=None):
         self.lt1=Lighting('192.168.11.99')
         self.color_data=color_data
         self.brightness_data=brightness_data

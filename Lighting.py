@@ -25,7 +25,7 @@ class Lighting():
                     'transitiontime':0,
                 }
                 self.b.set_light(3,cmd)
-                print(data[0][i],',',resampled_data_v[i])
+                print('v',' ',data[0][i],',',resampled_data_v[i])
                 end=time.time()
                 time.sleep(interval-(end-start))
         else:

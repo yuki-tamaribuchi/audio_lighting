@@ -27,6 +27,7 @@ class DataProcessing():
     chroma_array_left=[]
     chroma_array_right=[]
     brightness=[[],[]]
+    brightness_from_video=[]
     
 
 
@@ -183,7 +184,26 @@ class DataProcessing():
 
     def calc_brightness_from_video(self,file):
         vidcap=cv2.VideoCapture(file)
-        print(vidcap)
+        is_in_loop=True
+        i=0
+        while is_in_loop:
+            vidcap.set(cv2.CAP_PROP_POS_MSEC,i*100)
+            has_frame,frame_image=vidcap.read()
+            if has_frame:
+                height,width=frame_image.shape[:2]
+                image=Image.frombuffer(mode='RGB',size=(height,width),data=frame_image)
+                greyscale_image=image.convert('L')
+                histogram=greyscale_image.histogram()
+                pixels=sum(histogram)
+                brightness=scale=len(histogram)
+
+                for index in range(0, scale):
+                    ratio = histogram[index] / pixels
+                    brightness += ratio * (-scale + index)
+                self.brightness_from_video.append(1 if brightness == 255 else brightness / scale)
+                i+=1
+            else:
+                is_in_loop=False
 
 
     def create_color_data(self):

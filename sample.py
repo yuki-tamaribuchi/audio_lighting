@@ -5,7 +5,7 @@ import time
 
 #実装サンプル
 
-file='file.wav'
+file='file3.wav'
 
 #audio->'a',video->'v'
 dp1=DataProcessing(file,'a')

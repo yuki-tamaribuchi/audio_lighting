@@ -52,6 +52,11 @@ class DataProcessing():
         elif mode=='v':
             self.load_audio_from_video(file)
             if self.check_temp():
+
+                self.calc_brightness_from_video(file)
+
+
+
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
             else:    

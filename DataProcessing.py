@@ -24,8 +24,8 @@ class DataProcessing():
     audio_time_length=0
     chroma_array_left=[]
     chroma_array_right=[]
-    brightness_left=[]
-    brightness_right=[]
+    brightness=[[],[]]
+    
 
 
     color_array=[[],[],[],[]]
@@ -156,8 +156,9 @@ class DataProcessing():
         right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
         left_max=left_percussion_rs.max()
         right_max=right_percussion_rs.max()
-        self.brightness_left=left_percussion_rs/left_max
-        self.brightness_right=right_percussion_rs/right_max
+        #0=left,1=right
+        self.brightness[0]=left_percussion_rs/left_max
+        self.brightness[1]=right_percussion_rs/right_max
         print('Create Brightness data End')
 
 

@@ -17,7 +17,7 @@ class Lighting():
         print('Brightness Interval=',interval)
 
         if data_v:
-            pass
+            resampled_data_v=resample(data_v,data_length)
         else:
             for i in range(0,data_length):
                 start=time.time()

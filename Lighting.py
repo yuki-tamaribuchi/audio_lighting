@@ -20,6 +20,10 @@ class Lighting():
             resampled_data_v=resample(data_v,data_length)
             for i in range(0,data_length):
                 start=time.time()
+                cmd={
+                    'bri':int(127*data[0][i])+int(127*resampled_data_v[i]),
+                    'transitiontime':0,
+                }
                 end=time.time()
         else:
             for i in range(0,data_length):

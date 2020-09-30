@@ -54,9 +54,7 @@ class DataProcessing():
             self.load_audio_from_video(file)
             if self.check_temp():
 
-                self.calc_brightness_from_video(file)
-
-
+                #self.calc_brightness_from_video(file)
 
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
@@ -166,6 +164,12 @@ class DataProcessing():
             writer=csv.writer(f)
             writer.writerows(self.brightness)
         print('Save Brightness Data End')
+
+
+    def save_brightness_from_video_data(self):
+        print('Save Brightness from Video Data Start')
+        
+        print('Save Brightness from Video Data Start')
 
     
     def create_brightness_data(self):

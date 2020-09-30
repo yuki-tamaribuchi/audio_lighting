@@ -17,7 +17,7 @@ class Player():
         self.p=vlc.MediaPlayer()
         self.p.set_mrl(file)
         self.processes=[
-            Process(target=self.lt1.brightness,args=(self.brightness_data,self.audio_time_length)),
+            Process(target=self.lt1.brightness,args=(self.brightness_data,self.audio_time_length,self.brightness_v_data)),
             Process(target=self.lt1.color,args=(self.color_data,self.audio_time_length)),
         ]
 

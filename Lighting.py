@@ -18,6 +18,9 @@ class Lighting():
 
         if data_v:
             resampled_data_v=resample(data_v,data_length)
+            for i in range(0,data_length):
+                start=time.time()
+                end=time.time()
         else:
             for i in range(0,data_length):
                 start=time.time()

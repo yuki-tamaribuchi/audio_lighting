@@ -53,9 +53,6 @@ class DataProcessing():
         elif mode=='v':
             self.load_audio_from_video(file)
             if self.check_temp():
-
-                #self.calc_brightness_from_video(file)
-
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
             else:    
@@ -191,6 +188,7 @@ class DataProcessing():
 
 
     def calc_brightness_from_video(self,file):
+        print('Calc Brightness from Video Start')
         vidcap=cv2.VideoCapture(file)
         is_in_loop=True
         i=0
@@ -212,7 +210,7 @@ class DataProcessing():
                 i+=1
             else:
                 is_in_loop=False
-        print(len(self.brightness_from_video))
+        print('Calc Brightness from Video End')
 
 
     def create_color_data(self):

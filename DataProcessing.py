@@ -8,6 +8,8 @@ import csv
 from moviepy.video.io.VideoFileClip import VideoFileClip
 import json
 import os
+import cv2
+from PIL import Image
 
 class DataProcessing():
 

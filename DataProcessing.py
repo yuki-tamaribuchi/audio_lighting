@@ -168,7 +168,9 @@ class DataProcessing():
 
     def save_brightness_from_video_data(self):
         print('Save Brightness from Video Data Start')
-        
+        with open('brightness_from_video.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.brightness_from_video)
         print('Save Brightness from Video Data Start')
 
     

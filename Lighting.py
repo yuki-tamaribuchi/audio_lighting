@@ -27,6 +27,7 @@ class Lighting():
                 self.b.set_light(3,cmd)
                 print(data[0][i],',',resampled_data_v[i])
                 end=time.time()
+                time.sleep(interval-(end-start))
         else:
             for i in range(0,data_length):
                 start=time.time()

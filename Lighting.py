@@ -11,7 +11,7 @@ class Lighting():
 
 
     def brightness(self,data,audio_time_length):
-        data_length=len(data)
+        data_length=len(data[0])
         interval=audio_time_length/data_length
         print('Brightness Interval=',interval)
         for i in range(0,data_length):
@@ -23,7 +23,7 @@ class Lighting():
                 'transitiontime':0,
             }
             self.b.set_light(3,cmd)
-            print(data[i])
+            print(data[0][i])
             end=time.time()
             time.sleep(interval-(end-start))
 

@@ -29,10 +29,6 @@ class Player():
             prs.start()
         time.sleep(self.audio_time_length)
 
-    def lighting(self):
-        self.lt1.brightness(data=self.brightness_data,audio_time_length=self.audio_time_length)
-        self.lt1.color(data=self.color_data,audio_len=self.audio_time_length)
-
 
     def print_array(self,lighting_data):
         array_len=len(lighting_data['left'][0])

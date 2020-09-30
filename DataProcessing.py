@@ -174,6 +174,10 @@ class DataProcessing():
         print('Create Brightness data End')
 
 
+    def calc_brightness_from_video(self):
+        pass
+
+
     def create_color_data(self):
         print('Create Color Data Start')
         #convert sRGB to CIE1931 XY

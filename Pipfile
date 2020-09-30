@@ -16,6 +16,8 @@ pylint = "*"
 phue = "*"
 moviepy = "*"
 python-vlc = "*"
+opencv-python = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"

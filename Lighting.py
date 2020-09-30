@@ -24,6 +24,7 @@ class Lighting():
                     'bri':int(127*data[0][i])+int(127*resampled_data_v[i]),
                     'transitiontime':0,
                 }
+                self.b.set_light(3,cmd)
                 end=time.time()
         else:
             for i in range(0,data_length):

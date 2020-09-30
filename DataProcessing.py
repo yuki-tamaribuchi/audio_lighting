@@ -43,6 +43,7 @@ class DataProcessing():
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()
+                self.save_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         elif mode=='v':
@@ -55,6 +56,7 @@ class DataProcessing():
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()
+                self.save_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
         else:

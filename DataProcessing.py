@@ -68,6 +68,7 @@ class DataProcessing():
                 self.create_color_data()
                 self.save_color_data()
                 self.calc_brightness_from_video(file)
+                self.save_brightness_from_video_data()
         else:
             print('モードを"a"，または"v"で指定してください')
 
@@ -170,7 +171,7 @@ class DataProcessing():
         print('Save Brightness from Video Data Start')
         with open('brightness_from_video.csv','w') as f:
             writer=csv.writer(f)
-            writer.writerows(self.brightness_from_video)
+            writer.writerow(self.brightness_from_video)
         print('Save Brightness from Video Data Start')
 
     

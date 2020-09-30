@@ -69,6 +69,7 @@ class DataProcessing():
                 self.save_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
+                self.calc_brightness_from_video(file)
         else:
             print('モードを"a"，または"v"で指定してください')
 
@@ -204,6 +205,7 @@ class DataProcessing():
                 i+=1
             else:
                 is_in_loop=False
+        print(len(self.brightness_from_video))
 
 
     def create_color_data(self):

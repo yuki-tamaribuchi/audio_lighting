@@ -129,13 +129,13 @@ class DataProcessing():
 
     def dump_audio_array_length(self):
         d={'length':len(self.normalized_data)}
-        with open('temp.json','w') as f:
+        with open('temp_data/temp.json','w') as f:
             json.dump(d,f)
 
     def check_temp(self):
-        if not os.path.isfile('temp.json'):
+        if not os.path.isfile('temp_data/temp.json'):
             return False
-        with open('temp.json','r') as f:
+        with open('temp_data/temp.json','r') as f:
             temp_data=json.load(f)
             print(temp_data['length']==len(self.normalized_data))
             return temp_data['length']==len(self.normalized_data)
@@ -144,14 +144,14 @@ class DataProcessing():
 
     def export_csv(self):
         print('Export Start')
-        with open('data.csv','w') as f:
+        with open('temp_data/data.csv','w') as f:
             writer=csv.writer(f)
             writer.writerows(self.chrcqt_left_data,self.chrcqt_right_data)
         print('Export End')
 
     def save_color_data(self):
         print('Save Color Data Start')
-        with open('color.csv','w') as f:
+        with open('temp_data/color.csv','w') as f:
             writer=csv.writer(f)
             writer.writerows(self.color_array)
         print('Save Color Data End')
@@ -159,7 +159,7 @@ class DataProcessing():
 
     def save_brightness_data(self):
         print('Save Brightness Data Start')
-        with open('brightness.csv','w') as f:
+        with open('temp_data/brightness.csv','w') as f:
             writer=csv.writer(f)
             writer.writerows(self.brightness)
         print('Save Brightness Data End')
@@ -167,7 +167,7 @@ class DataProcessing():
 
     def save_brightness_from_video_data(self):
         print('Save Brightness from Video Data Start')
-        with open('brightness_from_video.csv','w') as f:
+        with open('temp_data/brightness_from_video.csv','w') as f:
             writer=csv.writer(f)
             writer.writerow(self.brightness_from_video)
         print('Save Brightness from Video Data Start')
@@ -336,7 +336,7 @@ class DataProcessing():
             
     def load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')
-        with open('color.csv','r') as f:
+        with open('temp_data/color.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
             i=0
             for row in reader:
@@ -347,7 +347,7 @@ class DataProcessing():
 
     def load_brightness_data_from_csv(self):
         print('Load Brightness Data from CSV Start')
-        with open('brightness.csv','r') as f:
+        with open('temp_data/brightness.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
             i=0
             for row in reader:
@@ -357,7 +357,7 @@ class DataProcessing():
 
     def load_brightness_data_from_video_from_csv(self):
         print('Load Brightness Data from Video from CSV Start')
-        with open('brightness_from_video.csv','r') as f:
+        with open('temp_data/brightness_from_video.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
             for row in reader:
                 self.brightness_from_video=row

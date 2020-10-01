@@ -43,7 +43,7 @@ class DataProcessing():
                 self.load_brightness_data_from_csv()
             else:
                 self.dump_audio_array_length()
-                self.estimate_bpm()
+                #self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()
@@ -58,7 +58,7 @@ class DataProcessing():
                 #self.load_brightness_data_from_video_from_csv()
             else:    
                 self.dump_audio_array_length()
-                self.estimate_bpm()
+                #self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()

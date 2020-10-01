@@ -1,6 +1,7 @@
 from pytube import YouTube
 
 '''
+20201001現在
 音楽系データダウンロードするには，pytubeライブラリのextract.pyを改変(自己責任)
 cipher_url = [
     parse_qs(formats[i]["signatureCipher"]) for i, data in enumerate(formats)

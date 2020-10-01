@@ -13,12 +13,16 @@ cipher_url = [
 
 class Ytdl():
     
-    def __init__(self,url):
-        self.dl(url)
+    def __init__(self,url,filename):
+        self.dl(url,filename)
 
 
-    def dl(self,url):
+    def dl(self,url,filename):
         print('Download Video from YouTube Start')
         yt=YouTube(url)
-        print(yt.streams)
+        yt.streams.all()
+        #yt.streams.filter(progressive=True,file_extension='.mp4',res='1080p').order_by('resolution')[-1].download(output_path='from_yt',filename=filename)
         print('Download Video from YouTube End')
+
+
+Ytdl('https://www.youtube.com/watch?v=qQjMMEWaWsc','these_nights')

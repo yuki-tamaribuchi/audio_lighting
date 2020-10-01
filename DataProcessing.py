@@ -55,7 +55,7 @@ class DataProcessing():
             if self.check_temp():
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
-                self.load_brightness_data_from_video_from_csv()
+                #self.load_brightness_data_from_video_from_csv()
             else:    
                 self.dump_audio_array_length()
                 self.estimate_bpm()
@@ -65,8 +65,8 @@ class DataProcessing():
                 self.save_brightness_data()
                 self.create_color_data()
                 self.save_color_data()
-                self.calc_brightness_from_video(file)
-                self.save_brightness_from_video_data()
+                #self.calc_brightness_from_video(file)
+                #self.save_brightness_from_video_data()
         else:
             print('モードを"a"，または"v"で指定してください')
 

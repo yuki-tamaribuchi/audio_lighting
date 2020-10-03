@@ -316,63 +316,11 @@ class DataProcessing():
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+        '''
         color_x_left=[]
         color_y_left=[]
         color_x_right=[]
         color_y_right=[]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        '''
-        for c in self.cens_left.T:
-            normalized_c=np.nan_to_num(np.divide(c.real,c.real.sum()))
-            
-
-            total_rgb=[]
-            for i in range(12):
-                print(i)
-                print('normalized_c',normalized_c[i])
-                print('chroma rgb',chroma_rgb[i])
-                multi=np.multiply(chroma_rgb[i],normalized_c[i])
-                print('multi',multi)
-                total_rgb.append(multi)
-                print(total_rgb)
-
 
 
 

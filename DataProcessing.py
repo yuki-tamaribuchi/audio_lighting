@@ -244,6 +244,7 @@ class DataProcessing():
     def create_color_data(self):
         print('Create Color Data Start')
         #convert sRGB to CIE1931 XY
+        '''
         chroma_rgb={
             #C
             0:{
@@ -318,6 +319,82 @@ class DataProcessing():
                 'B':190,
             }
         }
+        '''
+
+        chroma_rgb=np.array([
+            #C
+            [50,0,0],
+
+            #C#
+            [150,150,150],
+
+            #D
+            [200,190,100],
+
+            #D#
+            [0,100,65],
+
+            #E
+            [0,130,65],
+
+            #F
+            [200,0,30],
+
+            #F#
+            [230,190,190],
+
+            #G
+            [255,255,190],
+
+            #G#
+            [240,240,240],
+
+            #A
+            [150,100,50],
+
+            #A#
+            [120,0,130],
+
+            #B
+            [230,150,190]
+        ])
+
+        left_cens_total_by_time=self.cens_left.real.sum(axis=0)
+        #right_cens_total_by_time=self.cens_right.real.sum(axis=0)
+
+        left_normalied_total_cens_by_time=np.multiply(left_cens_total_by_time,chroma_rgb)
+        print(left_normalied_total_cens_by_time)
+        #right_normalied_total_cens_by_time=
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         color_x_left=[]
         color_y_left=[]
@@ -325,18 +402,49 @@ class DataProcessing():
         color_y_right=[]
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        '''
         for c in self.cens_left.T:
             normalized_c=np.nan_to_num(np.divide(c.real,c.real.sum()))
             
 
-
+            total_rgb=[]
             for i in range(12):
                 print(i)
+                print('normalized_c',normalized_c[i])
+                print('chroma rgb',chroma_rgb[i])
+                multi=np.multiply(chroma_rgb[i],normalized_c[i])
+                print('multi',multi)
+                total_rgb.append(multi)
+                print(total_rgb)
 
 
 
 
-            '''
             # gamma correction
             red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
             green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)

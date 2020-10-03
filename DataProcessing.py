@@ -69,7 +69,7 @@ class DataProcessing():
 
 
                 self.load_cens()
-                self.create_color_data()
+                self.create_rgb_data()
 
 
 
@@ -88,7 +88,7 @@ class DataProcessing():
                 
                 self.export_csv()
                 
-                self.create_color_data()
+                self.create_rgb_data()
 
                 
                 self.save_color_data()
@@ -244,8 +244,8 @@ class DataProcessing():
 
 
 
-    def create_color_data(self):
-        print('Create Color Data Start')
+    def create_rgb_data(self):
+        print('Create RGB Data Start')
         #convert sRGB to CIE1931 XY
 
 
@@ -320,7 +320,7 @@ class DataProcessing():
 
 
 
-        
+        '''
         # gamma correction
         #R/256が0.04045より大きいか小さいか
         #大きければ2.4乗，小さければ12.92で割るだけ
@@ -358,7 +358,8 @@ class DataProcessing():
         self.color_array[1]=color_x_right
         self.color_array[2]=color_y_left
         self.color_array[3]=color_y_right
-        print('Create Color Data End')
+        '''
+        print('Create RGB Data End')
         
             
 

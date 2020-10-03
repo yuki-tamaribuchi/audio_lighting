@@ -11,6 +11,9 @@ import os
 from cv2 import cv2
 from PIL import Image
 
+import sys
+np.set_printoptions(threshold=sys.maxsize)
+
 class DataProcessing():
 
 
@@ -359,28 +362,31 @@ class DataProcessing():
             [230,150,190]
         ])
 
+
+
+        #時間ごとの音階の合計を計算
         left_cens_total_by_time=self.cens_left.real.sum(axis=0)
         #right_cens_total_by_time=self.cens_right.real.sum(axis=0)
 
-        left_normalied_total_cens_by_time=np.multiply(left_cens_total_by_time,chroma_rgb)
-        print(left_normalied_total_cens_by_time)
-        #right_normalied_total_cens_by_time=
+        #時間ごとの音階の割合を計算
+        left_normalized_by_time=np.nan_to_num(np.divide(self.cens_left.real,left_cens_total_by_time))
+        #right_normalized_by_time=np.nan_to_num(np.divide(self.cens_right.real,right_cens_total_by_time))
+
+        #3回repeatしてreshape
+        left_normalized_by_time=np.repeat(left_normalized_by_time,3).reshape(12,len(left_normalized_by_time[0]),3)
+        #right_normalized_by_time=np.repeat(right_normalized_by_time,3).reshape(12,len(right_normalized_by_time[0]),3)
 
 
+        #normalized_by_timeのlength回繰り返してreshape
+        chroma_rgb=np.repeat(chroma_rgb,len(left_normalized_by_time[0]),0).reshape(12,len(left_normalized_by_time[0]),3)
 
 
+        left_rgb_mean=np.multiply(left_normalized_by_time,chroma_rgb)
+        #right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
 
 
-
-
-
-
-
-
-
-
-
-
+        left_rgb_total=left_rgb_mean.sum(axis=0)
+        #right_rgb_total=right_rgb_mean.sum(axis=0)
 
 
 

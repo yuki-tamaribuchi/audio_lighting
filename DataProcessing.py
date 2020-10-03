@@ -242,7 +242,7 @@ class DataProcessing():
 
 
     def create_color_data(self):
-        print('Create RGB Data Start')
+        print('Create Color Data Start')
         #convert sRGB to CIE1931 XY
 
 
@@ -317,7 +317,7 @@ class DataProcessing():
         print(self.xy.shape)
 
 
-        print('Create RGB Data End')
+        print('Create Color Data End')
         
 
     def convert_rgb_to_xy(self,data):

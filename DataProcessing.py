@@ -34,7 +34,6 @@ class DataProcessing():
     brightness=[[],[]]
     brightness_from_video=[]
     
-    color_array=[[],[],[],[]]
 
 
     def __init__(self,file,mode):

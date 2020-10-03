@@ -34,8 +34,6 @@ class DataProcessing():
     brightness=[[],[]]
     brightness_from_video=[]
     
-
-
     color_array=[[],[],[],[]]
 
 
@@ -69,7 +67,7 @@ class DataProcessing():
 
 
                 self.load_cens()
-                self.create_rgb_data()
+                self.create_color_data()
 
 
 
@@ -88,7 +86,7 @@ class DataProcessing():
                 
                 self.export_csv()
                 
-                self.create_rgb_data()
+                self.create_color_data()
 
                 
                 self.save_color_data()
@@ -244,7 +242,7 @@ class DataProcessing():
 
 
 
-    def create_rgb_data(self):
+    def create_color_data(self):
         print('Create RGB Data Start')
         #convert sRGB to CIE1931 XY
 

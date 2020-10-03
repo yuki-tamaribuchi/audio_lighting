@@ -361,6 +361,9 @@ class DataProcessing():
         '''
         print('Create RGB Data End')
         
+
+    def convert_rgb_to_xy(self):
+        pass
             
 
 

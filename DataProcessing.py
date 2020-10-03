@@ -33,6 +33,7 @@ class DataProcessing():
     chroma_array_right=[]
     brightness=[[],[]]
     brightness_from_video=[]
+    xy=[[],[],[],[]]
     
 
 
@@ -59,15 +60,13 @@ class DataProcessing():
 #                self.export_csv()
                 #self.load_cens()
                 self.create_color_data()
-#                self.save_color_data()
+                self.save_color_data()
         elif mode=='v':
             self.load_audio_from_video(file)
             if self.check_temp():
 
 
-                self.load_cens()
-                self.create_color_data()
-
+                #self.load_cens()
 
 
 
@@ -88,7 +87,7 @@ class DataProcessing():
                 self.create_color_data()
 
                 
-                #self.save_color_data()
+                self.save_color_data()
                 #self.calc_brightness_from_video(file)
                 #self.save_brightness_from_video_data()
                 
@@ -178,7 +177,7 @@ class DataProcessing():
         print('Save Color Data Start')
         with open('temp_data/color.csv','w') as f:
             writer=csv.writer(f)
-            writer.writerows(self.color_array)
+            writer.writerows(self.xy)
         print('Save Color Data End')
 
 
@@ -243,8 +242,6 @@ class DataProcessing():
 
     def create_color_data(self):
         print('Create Color Data Start')
-        #convert sRGB to CIE1931 XY
-
 
         chroma_rgb=np.array([
             #C
@@ -284,24 +281,16 @@ class DataProcessing():
             [230,150,190]
         ])
 
-
-
-        #時間ごとの音階の合計を計算
         left_cens_total_by_time=self.cens_left.real.sum(axis=0)
         right_cens_total_by_time=self.cens_right.real.sum(axis=0)
 
-        #時間ごとの音階の割合を計算
         left_normalized_by_time=np.nan_to_num(np.divide(self.cens_left.real,left_cens_total_by_time))
         right_normalized_by_time=np.nan_to_num(np.divide(self.cens_right.real,right_cens_total_by_time))
 
-        #3回repeatしてreshape
         left_normalized_by_time=np.repeat(left_normalized_by_time,3).reshape(12,len(left_normalized_by_time[0]),3)
         right_normalized_by_time=np.repeat(right_normalized_by_time,3).reshape(12,len(right_normalized_by_time[0]),3)
 
-
-        #normalized_by_timeのlength回繰り返してreshape
         chroma_rgb=np.repeat(chroma_rgb,len(left_normalized_by_time[0]),0).reshape(12,len(left_normalized_by_time[0]),3)
-
 
         left_rgb_mean=np.multiply(left_normalized_by_time,chroma_rgb)
         right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
@@ -314,8 +303,6 @@ class DataProcessing():
         right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb_total))
 
         self.xy=np.hstack([left_xy,right_xy])
-        print(self.xy.shape)
-
 
         print('Create Color Data End')
         
@@ -334,17 +321,14 @@ class DataProcessing():
 
         return x,y
         
-            
-
 
     def load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')
         with open('temp_data/color.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
-            i=0
             for row in reader:
-                self.color_array[i]=[float(s) for s in row]
-                i+=1
+                self.xy.append([float(s) for s in row])
+        print(np.array(self.xy))
         print('Load Color Data from CSV End')
 
 

@@ -310,10 +310,10 @@ class DataProcessing():
         #right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
 
 
-        self.left_rgb_total=left_rgb_mean.sum(axis=0)
-        #self.right_rgb_total=right_rgb_mean.sum(axis=0)
+        left_rgb_total=left_rgb_mean.sum(axis=0)
+        #right_rgb_total=right_rgb_mean.sum(axis=0)
 
-        
+        conv_xy=np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total)
 
 
 
@@ -321,22 +321,6 @@ class DataProcessing():
 
 
         '''
-        # gamma correction
-        #R/256が0.04045より大きいか小さいか
-        #大きければ2.4乗，小さければ12.92で割るだけ
-        red_left = pow( ((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
-
-
-
-        green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
-
-
-        blue_left =  pow(((rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['B']/256) > 0.04045 else ((rgb_left['B']/256) / 12.92)
-
-        red_right = pow(((rgb_right['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['R']/256) > 0.04045 else ((rgb_right['R']/256) / 12.92)
-        green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
-        blue_right =  pow(((rgb_right['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['B']/256) > 0.04045 else ((rgb_right['B']/256) / 12.92)
-
         # convert rgb to xyz
         x_left = red_left * 0.649926 + green_left * 0.103455 + blue_left * 0.197109
         y_left = red_left * 0.234327 + green_left * 0.743075 + blue_left * 0.022598
@@ -362,8 +346,11 @@ class DataProcessing():
         print('Create RGB Data End')
         
 
-    def convert_rgb_to_xy(self):
-        pass
+    def convert_rgb_to_xy(self,data):
+        r_gamma = pow( ((data[0]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[0]/256) > 0.04045 else ((data[0]/256) / 12.92)
+        g_gamma = pow( ((data[1]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[1]/256) > 0.04045 else ((data[1]/256) / 12.92)
+        b_gamma = pow( ((data[2]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[2]/256) > 0.04045 else ((data[2]/256) / 12.92)
+        
             
 
 

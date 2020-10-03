@@ -313,6 +313,9 @@ class DataProcessing():
         left_rgb_total=left_rgb_mean.sum(axis=0)
         #right_rgb_total=right_rgb_mean.sum(axis=0)
 
+        
+
+
 
 
 
@@ -320,9 +323,28 @@ class DataProcessing():
 
         '''
         # gamma correction
-        red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
-        green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
-        blue_left =  pow(((rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['B']/256) > 0.04045 else ((rgb_left['B']/256) / 12.92)
+        red_left = pow(
+            (
+                #R/256が0.04045より大きい場合とその他
+                (rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92
+            )
+
+
+
+        green_left = pow(
+            (
+                (rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) 
+                if (rgb_left['G']/256) > 0.04045 
+                else ((rgb_left['G']/256) / 12.92
+            )
+
+
+        blue_left =  pow(
+            (
+                (rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) 
+                if (rgb_left['B']/256) > 0.04045 
+                else ((rgb_left['B']/256) / 12.92
+            )
 
         red_right = pow(((rgb_right['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['R']/256) > 0.04045 else ((rgb_right['R']/256) / 12.92)
         green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
@@ -353,7 +375,7 @@ class DataProcessing():
         '''
             
 
-            
+
     def load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')
         with open('temp_data/color.csv','r') as f:

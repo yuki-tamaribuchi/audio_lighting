@@ -327,17 +327,16 @@ class DataProcessing():
 
         for c in self.cens_left.T:
             normalized_c=np.nan_to_num(np.divide(c.real,c.real.sum()))
-            print(normalized_c)
+            
 
 
-
-            rgb_left=chroma_rgb[c.argmax()]
-            rgb_right=chroma_rgb[c.argmax()]
-
+            for i in range(12):
+                print(i)
 
 
 
 
+            '''
             # gamma correction
             red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
             green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
@@ -369,6 +368,7 @@ class DataProcessing():
         self.color_array[2]=color_y_left
         self.color_array[3]=color_y_right
         print('Create Color Data End')
+        '''
             
     def load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')

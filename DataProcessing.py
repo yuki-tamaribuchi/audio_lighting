@@ -310,8 +310,8 @@ class DataProcessing():
         #right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
 
 
-        left_rgb_total=left_rgb_mean.sum(axis=0)
-        #right_rgb_total=right_rgb_mean.sum(axis=0)
+        self.left_rgb_total=left_rgb_mean.sum(axis=0)
+        #self.right_rgb_total=right_rgb_mean.sum(axis=0)
 
         
 

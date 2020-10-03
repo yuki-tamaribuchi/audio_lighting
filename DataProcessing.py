@@ -39,34 +39,54 @@ class DataProcessing():
         if mode=='a':
             self.load_music(file)
             if self.check_temp():
+
+                self.load_cens()
+                self.create_color_data()
+
+
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
             else:
-                self.dump_audio_array_length()
-                #self.estimate_bpm()
-                self.hpss_execute()
-                self.chromacens_execute()
-                self.create_brightness_data()
-                self.save_brightness_data()
+#                self.dump_audio_array_length()
+#                #self.estimate_bpm()
+#                self.hpss_execute()
+#                self.chromacens_execute()
+#                self.create_brightness_data()
+#                self.save_brightness_data()
+#
+#                self.export_csv()
+                self.load_cens()
                 self.create_color_data()
-                self.save_color_data()
+#                self.save_color_data()
         elif mode=='v':
             self.load_audio_from_video(file)
             if self.check_temp():
+
+
+                self.load_cens()
+                self.create_color_data()
+
+
+
+
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
                 #self.load_brightness_data_from_video_from_csv()
             else:    
-                self.dump_audio_array_length()
-                #self.estimate_bpm()
-                self.hpss_execute()
-                self.chromacens_execute()
-                self.create_brightness_data()
-                self.save_brightness_data()
+#                self.dump_audio_array_length()
+#                #self.estimate_bpm()
+#                self.hpss_execute()
+#                self.chromacens_execute()
+#                self.create_brightness_data()
+#                self.save_brightness_data()
+#                
+#                self.export_csv()
+#
+                self.load_cens()
                 self.create_color_data()
-                self.save_color_data()
-                #self.calc_brightness_from_video(file)
-                #self.save_brightness_from_video_data()
+#                self.save_color_data()
+#                #self.calc_brightness_from_video(file)
+#                #self.save_brightness_from_video_data()
         else:
             print('モードを"a"，または"v"で指定してください')
 
@@ -146,7 +166,7 @@ class DataProcessing():
         print('Export Start')
         with open('temp_data/data.csv','w') as f:
             writer=csv.writer(f)
-            writer.writerows(self.chrcqt_left_data,self.chrcqt_right_data)
+            writer.writerows(self.cens_left)
         print('Export End')
 
     def save_color_data(self):
@@ -212,6 +232,8 @@ class DataProcessing():
             else:
                 is_in_loop=False
         print('Calc Brightness from Video End')
+
+
 
 
     def create_color_data(self):
@@ -299,8 +321,17 @@ class DataProcessing():
 
         for c in self.cens_left.T:
 
+
+            print(type(c))
+
+
+
             rgb_left=chroma_rgb[c.argmax()]
             rgb_right=chroma_rgb[c.argmax()]
+
+
+
+
 
             # gamma correction
             red_left = pow(((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
@@ -363,3 +394,13 @@ class DataProcessing():
                 self.brightness_from_video=row
         print('Load Brightness Data from Video from CSV Start')
             
+
+
+    def load_cens(self):
+        with open('temp_data/data.csv','r') as f:
+            reader=csv.reader(f)
+            
+            for row in reader:
+                fl_row=[complex(s) for s in row]
+                self.cens_left=np.array(fl_row)
+    

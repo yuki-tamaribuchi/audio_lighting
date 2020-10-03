@@ -350,6 +350,15 @@ class DataProcessing():
         r_gamma = pow( ((data[0]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[0]/256) > 0.04045 else ((data[0]/256) / 12.92)
         g_gamma = pow( ((data[1]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[1]/256) > 0.04045 else ((data[1]/256) / 12.92)
         b_gamma = pow( ((data[2]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[2]/256) > 0.04045 else ((data[2]/256) / 12.92)
+
+        x = r_gamma * 0.649926 + g_gamma * 0.103455 + b_gamma * 0.197109
+        y = r_gamma * 0.234327 + g_gamma * 0.743075 + b_gamma * 0.022598
+        z = g_gamma * 0.053077 + b_gamma * 1.035763
+
+        x=x/(x+y+z)
+        y=y/(x+y+z)
+
+        return [x,y]
         
             
 

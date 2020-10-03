@@ -22,6 +22,8 @@ class DataProcessing():
     hpss_percussion_right=[]
     chrcqt_left_data=[]
     chrcqt_right_data=[]
+    cens_left=[[],[],[],[],[],[],[],[],[],[],[],[]]
+    cens_right=[[],[],[],[],[],[],[],[],[],[],[],[]]
     rate=0
     audio_time_length=0
     chroma_array_left=[]
@@ -322,10 +324,10 @@ class DataProcessing():
         color_x_right=[]
         color_y_right=[]
 
+
         for c in self.cens_left.T:
-
-
-            print(type(c))
+            normalized_c=np.nan_to_num(np.divide(c.real,c.real.sum()))
+            print(normalized_c)
 
 
 
@@ -402,8 +404,10 @@ class DataProcessing():
     def load_cens(self):
         with open('temp_data/data.csv','r') as f:
             reader=csv.reader(f)
-            
+            i=0
             for row in reader:
                 fl_row=[complex(s) for s in row]
-                self.cens_left=np.array(fl_row)
-    
+                self.cens_left[i]=np.array(fl_row)
+                i+=1
+            
+            self.cens_left=np.array(self.cens_left)

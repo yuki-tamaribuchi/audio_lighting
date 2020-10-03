@@ -84,14 +84,14 @@ class DataProcessing():
                 self.create_brightness_data()
                 self.save_brightness_data()
                 
-                self.export_csv()
+                #self.export_csv()
                 
                 self.create_color_data()
 
                 
                 #self.save_color_data()
-                self.calc_brightness_from_video(file)
-                self.save_brightness_from_video_data()
+                #self.calc_brightness_from_video(file)
+                #self.save_brightness_from_video_data()
                 
         else:
             print('モードを"a"，または"v"で指定してください')
@@ -289,15 +289,15 @@ class DataProcessing():
 
         #時間ごとの音階の合計を計算
         left_cens_total_by_time=self.cens_left.real.sum(axis=0)
-        #right_cens_total_by_time=self.cens_right.real.sum(axis=0)
+        right_cens_total_by_time=self.cens_right.real.sum(axis=0)
 
         #時間ごとの音階の割合を計算
         left_normalized_by_time=np.nan_to_num(np.divide(self.cens_left.real,left_cens_total_by_time))
-        #right_normalized_by_time=np.nan_to_num(np.divide(self.cens_right.real,right_cens_total_by_time))
+        right_normalized_by_time=np.nan_to_num(np.divide(self.cens_right.real,right_cens_total_by_time))
 
         #3回repeatしてreshape
         left_normalized_by_time=np.repeat(left_normalized_by_time,3).reshape(12,len(left_normalized_by_time[0]),3)
-        #right_normalized_by_time=np.repeat(right_normalized_by_time,3).reshape(12,len(right_normalized_by_time[0]),3)
+        right_normalized_by_time=np.repeat(right_normalized_by_time,3).reshape(12,len(right_normalized_by_time[0]),3)
 
 
         #normalized_by_timeのlength回繰り返してreshape
@@ -305,14 +305,17 @@ class DataProcessing():
 
 
         left_rgb_mean=np.multiply(left_normalized_by_time,chroma_rgb)
-        #right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
+        right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
 
 
         left_rgb_total=left_rgb_mean.sum(axis=0)
-        #right_rgb_total=right_rgb_mean.sum(axis=0)
+        right_rgb_total=right_rgb_mean.sum(axis=0)
 
         left_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total))
-        #right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb_total))
+        right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb_total))
+
+        self.xy=np.hstack([left_xy,right_xy])
+        print(self.xy.shape)
 
 
         print('Create RGB Data End')

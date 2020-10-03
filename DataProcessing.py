@@ -316,33 +316,6 @@ class DataProcessing():
         conv_xy=np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total)
 
 
-
-
-
-
-        '''
-        # convert rgb to xyz
-        x_left = red_left * 0.649926 + green_left * 0.103455 + blue_left * 0.197109
-        y_left = red_left * 0.234327 + green_left * 0.743075 + blue_left * 0.022598
-        z_left = green_left * 0.053077 + blue_left * 1.035763
-
-        x_right = red_right * 0.649926 + green_right * 0.103455 + blue_right * 0.197109
-        y_right = red_right * 0.234327 + green_right * 0.743075 + blue_right * 0.022598
-        z_right = green_right * 0.053077 + blue_right * 1.035763
-
-        # convert xyz to xy
-        color_x_left.append(x_left / (x_left + y_left + z_left))
-        color_y_left.append(y_left / (x_left + y_left + z_left))
-
-        color_x_right.append(x_right / (x_right + y_right + z_right))
-        color_y_right.append(y_right / (x_right + y_right + z_right))
-
-
-        self.color_array[0]=color_x_left
-        self.color_array[1]=color_x_right
-        self.color_array[2]=color_y_left
-        self.color_array[3]=color_y_right
-        '''
         print('Create RGB Data End')
         
 

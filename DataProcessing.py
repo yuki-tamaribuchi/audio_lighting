@@ -311,7 +311,8 @@ class DataProcessing():
         left_rgb_total=left_rgb_mean.sum(axis=0)
         #right_rgb_total=right_rgb_mean.sum(axis=0)
 
-        conv_xy=np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total)
+        left_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total))
+        #right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb_total))
 
 
         print('Create RGB Data End')
@@ -329,7 +330,7 @@ class DataProcessing():
         x=x/(x+y+z)
         y=y/(x+y+z)
 
-        return [x,y]
+        return x,y
         
             
 

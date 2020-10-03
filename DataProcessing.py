@@ -320,31 +320,18 @@ class DataProcessing():
 
 
 
-
-        '''
+        
         # gamma correction
-        red_left = pow(
-            (
-                #R/256が0.04045より大きい場合とその他
-                (rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92
-            )
+        #R/256が0.04045より大きいか小さいか
+        #大きければ2.4乗，小さければ12.92で割るだけ
+        red_left = pow( ((rgb_left['R']/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (rgb_left['R']/256) > 0.04045 else ((rgb_left['R']/256) / 12.92)
 
 
 
-        green_left = pow(
-            (
-                (rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) 
-                if (rgb_left['G']/256) > 0.04045 
-                else ((rgb_left['G']/256) / 12.92
-            )
+        green_left = pow(((rgb_left['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['G']/256) > 0.04045 else ((rgb_left['G']/256) / 12.92)
 
 
-        blue_left =  pow(
-            (
-                (rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) 
-                if (rgb_left['B']/256) > 0.04045 
-                else ((rgb_left['B']/256) / 12.92
-            )
+        blue_left =  pow(((rgb_left['B']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_left['B']/256) > 0.04045 else ((rgb_left['B']/256) / 12.92)
 
         red_right = pow(((rgb_right['R']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['R']/256) > 0.04045 else ((rgb_right['R']/256) / 12.92)
         green_right = pow(((rgb_right['G']/256) + 0.055) / (1.0 + 0.055), 2.4) if (rgb_right['G']/256) > 0.04045 else ((rgb_right['G']/256) / 12.92)
@@ -372,7 +359,7 @@ class DataProcessing():
         self.color_array[2]=color_y_left
         self.color_array[3]=color_y_right
         print('Create Color Data End')
-        '''
+        
             
 
 

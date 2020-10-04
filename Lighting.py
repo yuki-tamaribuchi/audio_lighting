@@ -44,7 +44,7 @@ class Lighting():
 
     
     def color(self,data,audio_len):
-        data_length=len(data[0])
+        data_length=len(data)
         print(data_length)
         interval=audio_len/data_length
         print('interval=',interval,'sec')

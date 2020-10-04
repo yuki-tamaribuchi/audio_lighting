@@ -328,7 +328,7 @@ class DataProcessing():
             reader=csv.reader(f,delimiter=',')
             for row in reader:
                 self.xy.append([float(s) for s in row])
-        print(np.array(self.xy))
+        self.xy=np.array(self.xy)
         print('Load Color Data from CSV End')
 
 

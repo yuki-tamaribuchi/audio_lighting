@@ -224,41 +224,44 @@ class DataProcessing():
         print('Create Color Data Start')
 
         chroma_rgb=np.array([
-            #C
-            [50,0,0],
+            #Kari Ziets' research 1931
+            #Color Name to RGB Reference -> https://web.njit.edu/~walsh/rgb.html
 
-            #C#
-            [150,150,150],
+            #C,ド,Red
+            [255,0,0],
 
-            #D
-            [200,190,100],
+            #C#,ド#(レb),Purple
+            [160,32,240],
 
-            #D#
-            [0,100,65],
+            #D,レ,Violet
+            [238,130,238],
 
-            #E
-            [0,130,65],
+            #D#,レ#(ミb),LightBlue
+            [173,216,230],
 
-            #F
-            [200,0,30],
+            #E,ミ,Gold
+            [255,215,0],
 
-            #F#
-            [230,190,190],
+            #F,ファ,Pink
+            [255,192,203],
 
-            #G
-            [255,255,190],
+            #F#,ファ#(ソb),turquoise4
+            [0,134,139],
 
-            #G#
-            [240,240,240],
+            #G,ソ,SkyBlue
+            [135,206,235],
 
-            #A
-            [150,100,50],
+            #G#,ソ#(ラb),Unknown -> White
+            [255,255,255],
 
-            #A#
-            [120,0,130],
+            #A,ラ,冷たい黄 -> Yellow
+            [255,255,0],
 
-            #B
-            [230,150,190]
+            #A#,ラ#(シb),Orange
+            [255,165,0],
+
+            #B,シ,Copper
+            [184,115,51]
         ])
 
         left_cens_total_by_time=self.cens_left.real.sum(axis=0)

@@ -327,7 +327,7 @@ class DataProcessing():
         with open('temp_data/color.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
             for row in reader:
-                self.xy.append(row)
+                self.xy.append([float(s) for s in row])
         self.xy=np.array(self.xy)
         print('Load Color Data from CSV End')
 

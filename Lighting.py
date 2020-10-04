@@ -38,16 +38,16 @@ class Lighting():
                     'transitiontime':0,
                 }
                 self.b.set_light(3,cmd)
-                print(data[0][i])
+                print('Brightness=',data[0][i])
                 end=time.time()
                 time.sleep(interval-(end-start))
 
     
     def color(self,data,audio_len):
         data_length=len(data)
-        print(data_length)
+        print('Color Data Length=',data_length)
         interval=audio_len/data_length
-        print('interval=',interval,'sec')
+        print('Color Interval=',interval,'sec')
         for i in range(0,data_length):
             start=time.time()
             cmd={

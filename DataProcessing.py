@@ -64,12 +64,6 @@ class DataProcessing():
         elif mode=='v':
             self.load_audio_from_video(file)
             if self.check_temp():
-
-
-                #self.load_cens()
-
-
-
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
                 #self.load_brightness_data_from_video_from_csv()
@@ -81,19 +75,13 @@ class DataProcessing():
                 self.chromacens_execute()
                 self.create_brightness_data()
                 self.save_brightness_data()
-                
-                #self.export_csv()
-                
                 self.create_color_data()
-
-                
                 self.save_color_data()
                 #self.calc_brightness_from_video(file)
                 #self.save_brightness_from_video_data()
                 
         else:
             print('モードを"a"，または"v"で指定してください')
-
 
 
     def load_music(self,file):

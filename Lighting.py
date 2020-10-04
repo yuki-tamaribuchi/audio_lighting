@@ -44,6 +44,7 @@ class Lighting():
 
     
     def color(self,data,audio_len):
+        print(data.shape)
         data_length=len(data)
         print('Color Data Length=',data_length)
         interval=audio_len/data_length
@@ -51,11 +52,11 @@ class Lighting():
         for i in range(0,data_length):
             start=time.time()
             cmd={
-                'xy':(data[0][i],data[1][i]),
+                'xy':(data[i][0],data[i][1]),
                 'transitiontime':0,
             }
             self.b.set_light(3,cmd)
             #self.lights[2].xy=data[0][i],data[2][i]
-            print('left x=',data[0][i],',left y=',data[1][i],',right x=',data[2][i],',right y=',data[3][i])
+            print('left x=',data[i][0],',left y=',data[i][1],',right x=',data[i][2],',right y=',data[i][3])
             end=time.time()
             time.sleep(interval-(end-start))

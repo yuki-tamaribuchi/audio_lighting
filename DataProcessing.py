@@ -117,7 +117,6 @@ class DataProcessing():
                 results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,0]))
                 results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,1]))
         future_execute(self)
-        print(results[0])
         self.hpss_harmonics_left,self.hpss_percussion_left=results[0].result()
         self.hpss_harmonics_right,self.hpss_percussion_right=results[1].result()
 

@@ -10,6 +10,7 @@ import json
 import os
 from cv2 import cv2
 from PIL import Image
+import asyncio
 
 import sys
 np.set_printoptions(threshold=sys.maxsize)

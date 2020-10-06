@@ -106,9 +106,20 @@ class DataProcessing():
 
     def hpss_execute(self):
         print('HPSS Start')
+        '''
         self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
         self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
-        
+        '''
+        def future_execute(self):
+            with futures.ThreadPoolExecutor(max_workers=2) as executer:
+                future_list=[
+                    executer.submit(librosa.effects.hpss(self.normalized_data[:,0])),
+                    executer.submit(librosa.effects.hpss(self.normalized_data[:,1]))
+                ]
+        results=future_execute(self)
+        print(results)
+
+
         print('HPSS End')
         
 

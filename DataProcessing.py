@@ -10,7 +10,6 @@ import json
 import os
 from cv2 import cv2
 from PIL import Image
-import asyncio
 
 import sys
 np.set_printoptions(threshold=sys.maxsize)
@@ -106,22 +105,9 @@ class DataProcessing():
 
     def hpss_execute(self):
         print('HPSS Start')
-        '''
         self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
         self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
-        '''
-        loop=asyncio.get_event_loop()
-        async def async_run(self):
-            task_left=loop.create_task(
-                librosa.effects.hpss(self.normalized_data[:,0])
-            )
-            task_right=loop.create_task(
-                librosa.effects.hpss(self.normalized_data[:,1])
-            )
-            self.hpss_harmonics_left,self.hpss_percussion_left=await task_left
-            self.hpss_harmonics_right,self.hpss_percussion_right=await task_right
-        loop.run_until_complete(async_run(self))
-#        '''
+        
         print('HPSS End')
         
 

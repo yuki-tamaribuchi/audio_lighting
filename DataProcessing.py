@@ -62,7 +62,7 @@ class DataProcessing():
                 #self.load_brightness_data_from_video_from_csv()
             else:
                     
-                self.dump_audio_array_length()
+                #self.dump_audio_array_length()
                 #self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
@@ -106,10 +106,24 @@ class DataProcessing():
 
     def hpss_execute(self):
         print('HPSS Start')
+        '''
         self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
         self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
+        '''
+        loop=asyncio.get_event_loop()
+        async def async_run(self):
+            task_left=loop.create_task(
+                librosa.effects.hpss(self.normalized_data[:,0])
+            )
+            task_right=loop.create_task(
+                librosa.effects.hpss(self.normalized_data[:,1])
+            )
+            self.hpss_harmonics_left,self.hpss_percussion_left=await task_left
+            self.hpss_harmonics_right,self.hpss_percussion_right=await task_right
+        loop.run_until_complete(async_run(self))
+#        '''
         print('HPSS End')
-
+        
 
     def chromacqt_execute(self,hop_length=2048,n_octaves=2,n_chroma=12):
         print('Chroma CQT Start')

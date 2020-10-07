@@ -306,16 +306,3 @@ class DataProcessing():
             for row in reader:
                 self.brightness_from_video=row
         print('Load Brightness Data from Video from CSV Start')
-            
-
-
-    def load_cens(self):
-        with open('temp_data/data.csv','r') as f:
-            reader=csv.reader(f)
-            i=0
-            for row in reader:
-                fl_row=[complex(s) for s in row]
-                self.cens_left[i]=np.array(fl_row)
-                i+=1
-            
-            self.cens_left=np.array(self.cens_left)

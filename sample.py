@@ -11,4 +11,4 @@ file='media_file/rojo.mp4'
 dp1=DataProcessing(file,'v',True)
 
 pl1=Player(file,dp1)
-pl1.play_w_lightring()
+pl1.play()

@@ -25,7 +25,7 @@ class Player():
         ]
 
 
-    def play_w_lightring(self):
+    def play(self):
 
         self.p.play()
         print('Audio Length=',round(self.audio_time_length),'sec')

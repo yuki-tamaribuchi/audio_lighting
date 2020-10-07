@@ -123,11 +123,6 @@ class DataProcessing():
         print('Chroma Cens End')
     
 
-    def disp_chrcqt(self,data,hop_length=4096):
-        plt.figure(figsize=(15,5))
-        librosa.display.specshow(data,x_axis='time',y_axis='chroma',hop_length=hop_length,cmap='coolwarm')
-        plt.show()
-
     def dump_audio_array_length(self):
         d={'length':len(self.normalized_data)}
         with open('temp_data/temp.json','w') as f:

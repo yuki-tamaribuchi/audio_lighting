@@ -264,8 +264,8 @@ class DataProcessing():
             #G,ソ,SkyBlue
             [135,206,235],
 
-            #G#,ソ#(ラb),Unknown -> White
-            [255,255,255],
+            #G#,ソ#(ラb),Unknown -> mean of G and A
+            [195,230,79],
 
             #A,ラ,冷たい黄 -> Yellow
             [255,255,0],

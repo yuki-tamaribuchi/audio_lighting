@@ -97,13 +97,6 @@ class DataProcessing():
         #self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
-
-
-    def estimate_bpm(self):
-        print('Estimate BPM Start')
-        self.bpm=librosa.beat.tempo(y=self.normalized_data[:,0])
-        print('Estimate BPM End')
-        print('BPM=',self.bpm)
         
 
     def hpss_execute(self):

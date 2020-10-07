@@ -11,6 +11,7 @@ import os
 from cv2 import cv2
 from PIL import Image
 from concurrent import futures
+import time
 
 import sys
 np.set_printoptions(threshold=sys.maxsize)
@@ -38,7 +39,8 @@ class DataProcessing():
     
 
 
-    def __init__(self,file,mode):
+    def __init__(self,file,mode,concurrent_mode):
+        self.concurrent_mode=concurrent_mode
 
         if mode=='a':
             self.load_music(file)
@@ -106,21 +108,18 @@ class DataProcessing():
 
     def hpss_execute(self):
         print('HPSS Start')
-        '''
-        self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
-        self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
-        '''
-        results=[]
-        def future_execute(self):
-
-            with futures.ThreadPoolExecutor(max_workers=2) as executer:
-                results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,0]))
-                results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,1]))
-        future_execute(self)
-        self.hpss_harmonics_left,self.hpss_percussion_left=results[0].result()
-        self.hpss_harmonics_right,self.hpss_percussion_right=results[1].result()
-
-
+        if self.concurrent_mode:
+            results=[]
+            def future_execute(self):
+                with futures.ThreadPoolExecutor(max_workers=2) as executer:
+                    results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,0]))
+                    results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,1]))
+            future_execute(self)
+            self.hpss_harmonics_left,self.hpss_percussion_left=results[0].result()
+            self.hpss_harmonics_right,self.hpss_percussion_right=results[1].result()
+        else:
+            self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
+            self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
         print('HPSS End')
         
 

@@ -49,7 +49,6 @@ class DataProcessing():
                 self.load_brightness_data_from_csv()
             else:
                 self.dump_audio_array_length()
-                #self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()
@@ -65,7 +64,6 @@ class DataProcessing():
             else:
                     
                 #self.dump_audio_array_length()
-                #self.estimate_bpm()
                 self.hpss_execute()
                 self.chromacens_execute()
                 self.create_brightness_data()
@@ -97,7 +95,7 @@ class DataProcessing():
         #self.dump_audio_array_length()
         self.audio_time_length=len(self.normalized_data)/self.rate
         print('Loading End')
-        
+
 
     def hpss_execute(self):
         print('HPSS Start')
@@ -115,13 +113,6 @@ class DataProcessing():
             self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
         print('HPSS End')
         
-
-    def chromacqt_execute(self,hop_length=2048,n_octaves=2,n_chroma=12):
-        print('Chroma CQT Start')
-        self.chrcqt_left_data=librosa.feature.chroma_cqt(y=self.hpss_harmonics_left,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
-        self.chrcqt_right_data=librosa.feature.chroma_cqt(y=self.hpss_harmonics_right,sr=self.rate,hop_length=hop_length,n_octaves=n_octaves,n_chroma=n_chroma)
-        print('Chroma CQT End')
-
 
     def chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
         print('Chroma Cens Start')

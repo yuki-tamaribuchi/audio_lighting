@@ -276,7 +276,7 @@ class DataProcessing():
             #B,シ,Copper
             [184,115,51]
         ])
-
+        '''
         left_cens_total_by_time=self.cens_left.real.sum(axis=0)
         right_cens_total_by_time=self.cens_right.real.sum(axis=0)
 
@@ -294,10 +294,13 @@ class DataProcessing():
 
         left_rgb_total=left_rgb_mean.sum(axis=0)
         right_rgb_total=right_rgb_mean.sum(axis=0)
+        
 
         left_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb_total))
         right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb_total))
-
+        '''
+        left_cens_argmax=self.cens_left.real.argmax(axis=0)
+        right_cens_argmaxa=self.cens_right.real.argmax(axis=0)
         self.xy=np.hstack([left_xy,right_xy])
 
         print('Create Color Data End')

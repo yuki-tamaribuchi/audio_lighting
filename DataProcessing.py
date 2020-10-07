@@ -276,28 +276,7 @@ class DataProcessing():
             #B,シ,Copper
             [184,115,51]
         ])
-        '''
-        left_cens_total_by_time=self.cens_left.real.sum(axis=0)
-        right_cens_total_by_time=self.cens_right.real.sum(axis=0)
 
-        left_normalized_by_time=np.nan_to_num(np.divide(self.cens_left.real,left_cens_total_by_time))
-        right_normalized_by_time=np.nan_to_num(np.divide(self.cens_right.real,right_cens_total_by_time))
-
-        left_normalized_by_time=np.repeat(left_normalized_by_time,3).reshape(12,len(left_normalized_by_time[0]),3)
-        right_normalized_by_time=np.repeat(right_normalized_by_time,3).reshape(12,len(right_normalized_by_time[0]),3)
-
-        chroma_rgb=np.repeat(chroma_rgb,len(left_normalized_by_time[0]),0).reshape(12,len(left_normalized_by_time[0]),3)
-
-        left_rgb_mean=np.multiply(left_normalized_by_time,chroma_rgb)
-        right_rgb_mean=np.multiply(right_normalized_by_time,chroma_rgb)
-
-
-        left_rgb_total=left_rgb_mean.sum(axis=0)
-        right_rgb_total=right_rgb_mean.sum(axis=0)
-        
-
-        
-        '''
         left_rgb=chroma_rgb[self.cens_left.real.argmax(axis=0)]
         right_rgb=chroma_rgb[self.cens_right.real.argmax(axis=0)]
         left_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb))

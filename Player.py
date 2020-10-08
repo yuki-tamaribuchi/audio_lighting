@@ -8,15 +8,14 @@ from multiprocessing import Process
 class Player():
 
 
-    def __init__(self,file,instance):
-        self.lt1=Lighting('192.168.11.99')
-        self.color_data=instance.xy
-        self.brightness_data=instance.brightness
-        if instance.brightness_from_video:
-            self.brightness_v_data=instance.brightness_from_video
+    def __init__(self,file,data_instance,light_instance):
+        self.color_data=data_instance.xy
+        self.brightness_data=data_instance.brightness
+        if data_instance.brightness_from_video:
+            self.brightness_v_data=data_instance.brightness_from_video
         else:
             self.brightness_v_data=None
-        self.audio_time_length=instance.audio_time_length
+        self.audio_time_length=data_instance.audio_time_length
         self.p=vlc.MediaPlayer()
         self.p.set_mrl(file)
         self.processes=[

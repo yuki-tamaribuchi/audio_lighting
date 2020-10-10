@@ -49,11 +49,16 @@ class Lighting():
         print('Color Interval=',interval,'sec')
         for i in range(0,data_length):
             start=time.time()
-            cmd={
+            cmd_left={
                 'xy':(data[i][0],data[i][1]),
                 'transitiontime':0,
             }
-            self.__b.set_light(3,cmd)
+            cmd_right={
+                'xy':(data[i][2],data[i][3]),
+                'transitiontime':0,   
+            }
+            self.__b.set_light(3,cmd_left)
+            #self.__b.set_light(,cmd_right)
             print('left x=',data[i][0],',left y=',data[i][1],',right x=',data[i][2],',right y=',data[i][3])
             end=time.time()
             time.sleep(interval-(end-start))

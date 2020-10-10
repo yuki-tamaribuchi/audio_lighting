@@ -19,12 +19,9 @@ np.set_printoptions(threshold=sys.maxsize)
 class DataProcessing():
 
 
-    brightness=[[],[]]
-    brightness_from_video=[]
-    
-
-
     def __init__(self,file,mode,concurrent_mode):
+        self.brightness=[[],[]]
+        self.brightness_from_video=[]
         self.concurrent_mode=concurrent_mode
 
         if mode=='a':

@@ -102,52 +102,6 @@ class DataProcessing():
         self.__cens_right=librosa.feature.chroma_cens(C=C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
         print('Chroma Cens End')
     
-
-    def __dump_audio_array_length(self):
-        d={'length':len(self.__normalized_data)}
-        with open('temp_data/temp.json','w') as f:
-            json.dump(d,f)
-
-    def __check_temp(self):
-        if not os.path.isfile('temp_data/temp.json'):
-            return False
-        with open('temp_data/temp.json','r') as f:
-            temp_data=json.load(f)
-            print(temp_data['length']==len(self.__normalized_data))
-            return temp_data['length']==len(self.__normalized_data)
-                
-
-
-    def __export_csv(self):
-        print('Export Start')
-        with open('temp_data/data.csv','w') as f:
-            writer=csv.writer(f)
-            writer.writerows(self.__cens_left)
-        print('Export End')
-
-    def __save_color_data(self):
-        print('Save Color Data Start')
-        with open('temp_data/color.csv','w') as f:
-            writer=csv.writer(f)
-            writer.writerows(self.xy)
-        print('Save Color Data End')
-
-
-    def __save_brightness_data(self):
-        print('Save Brightness Data Start')
-        with open('temp_data/brightness.csv','w') as f:
-            writer=csv.writer(f)
-            writer.writerows(self.brightness)
-        print('Save Brightness Data End')
-
-
-    def __save_brightness_from_video_data(self):
-        print('Save Brightness from Video Data Start')
-        with open('temp_data/brightness_from_video.csv','w') as f:
-            writer=csv.writer(f)
-            writer.writerow(self.brightness_from_video)
-        print('Save Brightness from Video Data Start')
-
     
     def __create_brightness_data(self):
         print('Create Brightness data Start')
@@ -286,3 +240,49 @@ class DataProcessing():
             for row in reader:
                 self.brightness_from_video=row
         print('Load Brightness Data from Video from CSV Start')
+
+
+    def __dump_audio_array_length(self):
+        d={'length':len(self.__normalized_data)}
+        with open('temp_data/temp.json','w') as f:
+            json.dump(d,f)
+
+    def __check_temp(self):
+        if not os.path.isfile('temp_data/temp.json'):
+            return False
+        with open('temp_data/temp.json','r') as f:
+            temp_data=json.load(f)
+            print(temp_data['length']==len(self.__normalized_data))
+            return temp_data['length']==len(self.__normalized_data)
+                
+
+
+    def __export_csv(self):
+        print('Export Start')
+        with open('temp_data/data.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.__cens_left)
+        print('Export End')
+
+    def __save_color_data(self):
+        print('Save Color Data Start')
+        with open('temp_data/color.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.xy)
+        print('Save Color Data End')
+
+
+    def __save_brightness_data(self):
+        print('Save Brightness Data Start')
+        with open('temp_data/brightness.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerows(self.brightness)
+        print('Save Brightness Data End')
+
+
+    def __save_brightness_from_video_data(self):
+        print('Save Brightness from Video Data Start')
+        with open('temp_data/brightness_from_video.csv','w') as f:
+            writer=csv.writer(f)
+            writer.writerow(self.brightness_from_video)
+        print('Save Brightness from Video Data Start')

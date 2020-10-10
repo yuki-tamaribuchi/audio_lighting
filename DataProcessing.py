@@ -13,8 +13,6 @@ from PIL import Image
 from concurrent import futures
 import time
 
-import sys
-np.set_printoptions(threshold=sys.maxsize)
 
 class DataProcessing():
 

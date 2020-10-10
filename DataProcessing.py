@@ -19,23 +19,8 @@ np.set_printoptions(threshold=sys.maxsize)
 class DataProcessing():
 
 
-    loaded_data=[]
-    normalized_data=[]
-    hpss_harmonics_left=[]
-    hpss_harmonics_right=[]
-    hpss_percussion_left=[]
-    hpss_percussion_right=[]
-    chrcqt_left_data=[]
-    chrcqt_right_data=[]
-    cens_left=[[],[],[],[],[],[],[],[],[],[],[],[]]
-    cens_right=[[],[],[],[],[],[],[],[],[],[],[],[]]
-    rate=0
-    audio_time_length=0
-    chroma_array_left=[]
-    chroma_array_right=[]
     brightness=[[],[]]
     brightness_from_video=[]
-    xy=[]
     
 
 

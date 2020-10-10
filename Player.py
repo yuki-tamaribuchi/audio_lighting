@@ -32,16 +32,3 @@ class Player():
         for prs in self.processes:
             prs.start()
         time.sleep(self.audio_time_length)
-
-
-    def print_array(self,lighting_data):
-        array_len=len(lighting_data['left'][0])
-        interval=1/(array_len/self.audio_time_length)
-
-        print(interval)
-
-        for i in range(0,array_len,1):
-            print(lighting_data['left'][0][i],',',lighting_data['right'][0][i])
-            time.sleep(interval)
-
-

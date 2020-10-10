@@ -54,7 +54,6 @@ class Lighting():
                 'transitiontime':0,
             }
             self.__b.set_light(3,cmd)
-            #self.lights[2].xy=data[0][i],data[2][i]
             print('left x=',data[i][0],',left y=',data[i][1],',right x=',data[i][2],',right y=',data[i][3])
             end=time.time()
             time.sleep(interval-(end-start))

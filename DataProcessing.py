@@ -25,7 +25,7 @@ class DataProcessing():
         self.concurrent_mode=concurrent_mode
 
         if mode=='a':
-            self.load_music(file)
+            self.load_audio(file)
             if self.check_temp():
                 self.load_color_data_from_csv()
                 self.load_brightness_data_from_csv()
@@ -59,7 +59,7 @@ class DataProcessing():
             print('モードを"a"，または"v"で指定してください')
 
 
-    def load_music(self,file):
+    def load_audio(self,file):
         print('Loading Start')
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768

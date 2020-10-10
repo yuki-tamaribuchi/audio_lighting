@@ -13,4 +13,4 @@ dp1=DataProcessing(file,'v',True)
 lt1=Lighting('192.168.11.99')
 
 pl1=Player(file,dp1,lt1)
-pl1.play()
+#pl1.play()

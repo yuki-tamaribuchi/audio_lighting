@@ -25,41 +25,41 @@ class DataProcessing():
         self.concurrent_mode=concurrent_mode
 
         if mode=='a':
-            self.load_audio(file)
-            if self.check_temp():
-                self.load_color_data_from_csv()
-                self.load_brightness_data_from_csv()
+            self.__load_audio(file)
+            if self.__check_temp():
+                self.__load_color_data_from_csv()
+                self.__load_brightness_data_from_csv()
             else:
-                self.dump_audio_array_length()
-                self.hpss_execute()
-                self.chromacens_execute()
-                self.create_brightness_data()
-                self.save_brightness_data()
-                self.create_color_data()
-                self.save_color_data()
+                self.__dump_audio_array_length()
+                self.__hpss_execute()
+                self.__chromacens_execute()
+                self.__create_brightness_data()
+                self.__save_brightness_data()
+                self.__create_color_data()
+                self.__save_color_data()
         elif mode=='v':
-            self.load_audio_from_video(file)
-            if self.check_temp():
-                self.load_color_data_from_csv()
-                self.load_brightness_data_from_csv()
-                #self.load_brightness_data_from_video_from_csv()
+            self.__load_audio_from_video(file)
+            if self.__check_temp():
+                self.__load_color_data_from_csv()
+                self.__load_brightness_data_from_csv()
+                #self.__load_brightness_data_from_video_from_csv()
             else:
                     
-                #self.dump_audio_array_length()
-                self.hpss_execute()
-                self.chromacens_execute()
-                self.create_brightness_data()
-                self.save_brightness_data()
-                self.create_color_data()
-                self.save_color_data()
-                #self.calc_brightness_from_video(file)
-                #self.save_brightness_from_video_data()
+                #self.__dump_audio_array_length()
+                self.__hpss_execute()
+                self.__chromacens_execute()
+                self.__create_brightness_data()
+                self.__save_brightness_data()
+                self.__create_color_data()
+                self.__save_color_data()
+                #self.__calc_brightness_from_video(file)
+                #self.__save_brightness_from_video_data()
                 
         else:
             print('モードを"a"，または"v"で指定してください')
 
 
-    def load_audio(self,file):
+    def __load_audio(self,file):
         print('Loading Start')
         self.rate,self.loaded_data=wavfile.read(file)
         self.normalized_data=self.loaded_data/32768
@@ -68,7 +68,7 @@ class DataProcessing():
         print('Loading End')
 
 
-    def load_audio_from_video(self,file):
+    def __load_audio_from_video(self,file):
         print('Loading Start')
         video_data=VideoFileClip(file)
         audio_data=video_data.audio
@@ -79,7 +79,7 @@ class DataProcessing():
         print('Loading End')
 
 
-    def hpss_execute(self):
+    def __hpss_execute(self):
         print('HPSS Start')
         if self.concurrent_mode:
             results=[]
@@ -96,7 +96,7 @@ class DataProcessing():
         print('HPSS End')
         
 
-    def chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
+    def __chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
         print('Chroma Cens Start')
         C_left=librosa.cqt(self.hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
         C_right=librosa.cqt(self.hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
@@ -105,12 +105,12 @@ class DataProcessing():
         print('Chroma Cens End')
     
 
-    def dump_audio_array_length(self):
+    def __dump_audio_array_length(self):
         d={'length':len(self.normalized_data)}
         with open('temp_data/temp.json','w') as f:
             json.dump(d,f)
 
-    def check_temp(self):
+    def __check_temp(self):
         if not os.path.isfile('temp_data/temp.json'):
             return False
         with open('temp_data/temp.json','r') as f:
@@ -120,14 +120,14 @@ class DataProcessing():
                 
 
 
-    def export_csv(self):
+    def __export_csv(self):
         print('Export Start')
         with open('temp_data/data.csv','w') as f:
             writer=csv.writer(f)
             writer.writerows(self.cens_left)
         print('Export End')
 
-    def save_color_data(self):
+    def __save_color_data(self):
         print('Save Color Data Start')
         with open('temp_data/color.csv','w') as f:
             writer=csv.writer(f)
@@ -135,7 +135,7 @@ class DataProcessing():
         print('Save Color Data End')
 
 
-    def save_brightness_data(self):
+    def __save_brightness_data(self):
         print('Save Brightness Data Start')
         with open('temp_data/brightness.csv','w') as f:
             writer=csv.writer(f)
@@ -143,7 +143,7 @@ class DataProcessing():
         print('Save Brightness Data End')
 
 
-    def save_brightness_from_video_data(self):
+    def __save_brightness_from_video_data(self):
         print('Save Brightness from Video Data Start')
         with open('temp_data/brightness_from_video.csv','w') as f:
             writer=csv.writer(f)
@@ -151,7 +151,7 @@ class DataProcessing():
         print('Save Brightness from Video Data Start')
 
     
-    def create_brightness_data(self):
+    def __create_brightness_data(self):
         print('Create Brightness data Start')
         resample_size=int((self.audio_time_length/60)*600)
         print('Resample Size=',resample_size)
@@ -166,7 +166,7 @@ class DataProcessing():
         print('Create Brightness data End')
 
 
-    def calc_brightness_from_video(self,file):
+    def __calc_brightness_from_video(self,file):
         print('Calc Brightness from Video Start')
         vidcap=cv2.VideoCapture(file)
         is_in_loop=True
@@ -194,7 +194,7 @@ class DataProcessing():
 
 
 
-    def create_color_data(self):
+    def __create_color_data(self):
         print('Create Color Data Start')
 
         chroma_rgb=np.array([
@@ -240,13 +240,13 @@ class DataProcessing():
 
         left_rgb=chroma_rgb[self.cens_left.real.argmax(axis=0)]
         right_rgb=chroma_rgb[self.cens_right.real.argmax(axis=0)]
-        left_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,left_rgb))
-        right_xy=np.nan_to_num(np.apply_along_axis(self.convert_rgb_to_xy,1,right_rgb))
+        left_xy=np.nan_to_num(np.apply_along_axis(self.__convert_rgb_to_xy,1,left_rgb))
+        right_xy=np.nan_to_num(np.apply_along_axis(self.__convert_rgb_to_xy,1,right_rgb))
         self.xy=np.hstack([left_xy,right_xy])
         print('Create Color Data End')
         
 
-    def convert_rgb_to_xy(self,data):
+    def __convert_rgb_to_xy(self,data):
         r_gamma = pow( ((data[0]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[0]/256) > 0.04045 else ((data[0]/256) / 12.92)
         g_gamma = pow( ((data[1]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[1]/256) > 0.04045 else ((data[1]/256) / 12.92)
         b_gamma = pow( ((data[2]/256) + 0.055) / (1.0 + 0.055), 2.4 ) if (data[2]/256) > 0.04045 else ((data[2]/256) / 12.92)
@@ -261,7 +261,7 @@ class DataProcessing():
         return x,y
         
 
-    def load_color_data_from_csv(self):
+    def __load_color_data_from_csv(self):
         print('Load Color Data from CSV Start')
         with open('temp_data/color.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
@@ -271,7 +271,7 @@ class DataProcessing():
         print('Load Color Data from CSV End')
 
 
-    def load_brightness_data_from_csv(self):
+    def __load_brightness_data_from_csv(self):
         print('Load Brightness Data from CSV Start')
         with open('temp_data/brightness.csv','r') as f:
             reader=csv.reader(f,delimiter=',')
@@ -281,7 +281,7 @@ class DataProcessing():
                 i+=1
         print('Load Brightness Data from CSV End')
 
-    def load_brightness_data_from_video_from_csv(self):
+    def __load_brightness_data_from_video_from_csv(self):
         print('Load Brightness Data from Video from CSV Start')
         with open('temp_data/brightness_from_video.csv','r') as f:
             reader=csv.reader(f,delimiter=',')

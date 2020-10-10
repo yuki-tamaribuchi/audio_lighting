@@ -1,5 +1,3 @@
-import numpy as np
-import sounddevice
 import time
 from Lighting import Lighting
 import vlc

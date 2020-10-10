@@ -20,7 +20,7 @@ class DataProcessing():
     def __init__(self,file,mode,concurrent_mode):
         self.brightness=[[],[]]
         self.brightness_from_video=[]
-        self.concurrent_mode=concurrent_mode
+        self.__concurrent_mode=concurrent_mode
 
         if mode=='a':
             self.__load_audio(file)
@@ -59,10 +59,10 @@ class DataProcessing():
 
     def __load_audio(self,file):
         print('Loading Start')
-        self.rate,self.loaded_data=wavfile.read(file)
-        self.normalized_data=self.loaded_data/32768
-        #self.dump_audio_array_length()
-        self.audio_time_length=len(self.normalized_data)/self.rate
+        self.__rate,self.__loaded_data=wavfile.read(file)
+        self.__normalized_data=self.__loaded_data/32768
+        #self.__dump_audio_array_length()
+        self.audio_time_length=len(self.__normalized_data)/self.__rate
         print('Loading End')
 
 
@@ -70,41 +70,41 @@ class DataProcessing():
         print('Loading Start')
         video_data=VideoFileClip(file)
         audio_data=video_data.audio
-        self.normalized_data=audio_data.to_soundarray()
-        self.rate=44100
+        self.__normalized_data=audio_data.to_soundarray()
+        self.__rate=44100
         #self.dump_audio_array_length()
-        self.audio_time_length=len(self.normalized_data)/self.rate
+        self.audio_time_length=len(self.__normalized_data)/self.__rate
         print('Loading End')
 
 
     def __hpss_execute(self):
         print('HPSS Start')
-        if self.concurrent_mode:
+        if self.__concurrent_mode:
             results=[]
             def future_execute(self):
                 with futures.ThreadPoolExecutor(max_workers=2) as executer:
-                    results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,0]))
-                    results.append(executer.submit(librosa.effects.hpss,self.normalized_data[:,1]))
+                    results.append(executer.submit(librosa.effects.hpss,self.__normalized_data[:,0]))
+                    results.append(executer.submit(librosa.effects.hpss,self.__normalized_data[:,1]))
             future_execute(self)
-            self.hpss_harmonics_left,self.hpss_percussion_left=results[0].result()
-            self.hpss_harmonics_right,self.hpss_percussion_right=results[1].result()
+            self.__hpss_harmonics_left,self.__hpss_percussion_left=results[0].result()
+            self.__hpss_harmonics_right,self.__hpss_percussion_right=results[1].result()
         else:
-            self.hpss_harmonics_left,self.hpss_percussion_left=librosa.effects.hpss(self.normalized_data[:,0])
-            self.hpss_harmonics_right,self.hpss_percussion_right=librosa.effects.hpss(self.normalized_data[:,1])
+            self.__hpss_harmonics_left,self.__hpss_percussion_left=librosa.effects.hpss(self.__normalized_data[:,0])
+            self.__hpss_harmonics_right,self.__hpss_percussion_right=librosa.effects.hpss(self.__normalized_data[:,1])
         print('HPSS End')
         
 
     def __chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
         print('Chroma Cens Start')
-        C_left=librosa.cqt(self.hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
-        C_right=librosa.cqt(self.hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
-        self.cens_left=librosa.feature.chroma_cens(C=C_left,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
-        self.cens_right=librosa.feature.chroma_cens(C=C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        C_left=librosa.cqt(self.__hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
+        C_right=librosa.cqt(self.__hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
+        self.__cens_left=librosa.feature.chroma_cens(C=C_left,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        self.__cens_right=librosa.feature.chroma_cens(C=C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
         print('Chroma Cens End')
     
 
     def __dump_audio_array_length(self):
-        d={'length':len(self.normalized_data)}
+        d={'length':len(self.__normalized_data)}
         with open('temp_data/temp.json','w') as f:
             json.dump(d,f)
 
@@ -113,8 +113,8 @@ class DataProcessing():
             return False
         with open('temp_data/temp.json','r') as f:
             temp_data=json.load(f)
-            print(temp_data['length']==len(self.normalized_data))
-            return temp_data['length']==len(self.normalized_data)
+            print(temp_data['length']==len(self.__normalized_data))
+            return temp_data['length']==len(self.__normalized_data)
                 
 
 
@@ -122,7 +122,7 @@ class DataProcessing():
         print('Export Start')
         with open('temp_data/data.csv','w') as f:
             writer=csv.writer(f)
-            writer.writerows(self.cens_left)
+            writer.writerows(self.__cens_left)
         print('Export End')
 
     def __save_color_data(self):
@@ -154,8 +154,8 @@ class DataProcessing():
         resample_size=int((self.audio_time_length/60)*600)
         print('Resample Size=',resample_size)
         print('S/L=',self.audio_time_length/resample_size)
-        left_percussion_rs=resample(abs(self.hpss_percussion_left),resample_size)
-        right_percussion_rs=resample(abs(self.hpss_percussion_right),resample_size)
+        left_percussion_rs=resample(abs(self.__hpss_percussion_left),resample_size)
+        right_percussion_rs=resample(abs(self.__hpss_percussion_right),resample_size)
         left_max=left_percussion_rs.max()
         right_max=right_percussion_rs.max()
         #0=left,1=right
@@ -236,8 +236,8 @@ class DataProcessing():
             [184,115,51]
         ])
 
-        left_rgb=chroma_rgb[self.cens_left.real.argmax(axis=0)]
-        right_rgb=chroma_rgb[self.cens_right.real.argmax(axis=0)]
+        left_rgb=chroma_rgb[self.__cens_left.real.argmax(axis=0)]
+        right_rgb=chroma_rgb[self.__cens_right.real.argmax(axis=0)]
         left_xy=np.nan_to_num(np.apply_along_axis(self.__convert_rgb_to_xy,1,left_rgb))
         right_xy=np.nan_to_num(np.apply_along_axis(self.__convert_rgb_to_xy,1,right_rgb))
         self.xy=np.hstack([left_xy,right_xy])

@@ -11,7 +11,6 @@ import os
 from cv2 import cv2
 from PIL import Image
 from concurrent import futures
-import time
 
 
 class DataProcessing():

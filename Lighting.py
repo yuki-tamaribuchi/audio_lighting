@@ -5,10 +5,10 @@ from scipy.signal import resample
 class Lighting():
 
     def __init__(self,ip_addr):
-        self.b=Bridge(ip_addr)
-        self.b.connect()
-        self.lights=self.b.lights
-        self.lights[2].brightness=127
+        self.__b=Bridge(ip_addr)
+        self.__b.connect()
+        self.__lights=self.__b.lights
+        self.__lights[2].brightness=127
 
 
     def brightness(self,data,audio_time_length,data_v=None):
@@ -24,7 +24,7 @@ class Lighting():
                     'bri':int(127*data[0][i])+int(127*resampled_data_v[i]),
                     'transitiontime':0,
                 }
-                self.b.set_light(3,cmd)
+                self.__b.set_light(3,cmd)
                 print('v',' ',data[0][i],',',resampled_data_v[i])
                 end=time.time()
                 time.sleep(interval-(end-start))
@@ -37,7 +37,7 @@ class Lighting():
                     'bri':int(255*data[0][i]),
                     'transitiontime':0,
                 }
-                self.b.set_light(3,cmd)
+                self.__b.set_light(3,cmd)
                 print('Brightness=',data[0][i])
                 end=time.time()
                 time.sleep(interval-(end-start))
@@ -55,7 +55,7 @@ class Lighting():
                 'xy':(data[i][0],data[i][1]),
                 'transitiontime':0,
             }
-            self.b.set_light(3,cmd)
+            self.__b.set_light(3,cmd)
             #self.lights[2].xy=data[0][i],data[2][i]
             print('left x=',data[i][0],',left y=',data[i][1],',right x=',data[i][2],',right y=',data[i][3])
             end=time.time()

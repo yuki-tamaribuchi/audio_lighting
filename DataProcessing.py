@@ -95,10 +95,10 @@ class DataProcessing():
 
     def __chromacens_execute(self,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
         print('Chroma Cens Start')
-        C_left=librosa.cqt(self.__hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
-        C_right=librosa.cqt(self.__hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
-        self.__cens_left=librosa.feature.chroma_cens(C=C_left,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
-        self.__cens_right=librosa.feature.chroma_cens(C=C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        self.__C_left=librosa.cqt(self.__hpss_harmonics_left,n_bins=n_bins,hop_length=hop_length)
+        self.__C_right=librosa.cqt(self.__hpss_harmonics_right,n_bins=n_bins,hop_length=hop_length)
+        self.__cens_left=librosa.feature.chroma_cens(C=self.__C_left,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
+        self.__cens_right=librosa.feature.chroma_cens(C=self.__C_right,hop_length=hop_length,fmin=fmin,win_len_smooth=win_len_smooth)
         print('Chroma Cens End')
     
     

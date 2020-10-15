@@ -34,7 +34,7 @@ class PaperData():
                 writer.writerows(chroma_scale)
 
 
-    def save_logc_plot(self):
+    def save_logc_plot_left(self):
         import librosa
         import librosa.display
         from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
@@ -42,18 +42,80 @@ class PaperData():
         fig_left=plt.Figure()
         canvas_left=FigureCanvas(fig_left)
         ax_left=fig_left.add_subplot(111)
-        p_left=librosa.display.specshow(librosa.amplitude_to_db(self.instance._DataProcessing__C_left,ref=np.max),ax=ax_left,y_axis='log',x_axis='time')
+        p_left=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__C_left)),sr=self.instance._DataProcessing__rate,ax=ax_left,x_axis='time',y_axis='cqt_note')
         if self.verbose:
             fig_left.savefig('spec_left_'+self.verbose+'.png')
         else:
             fig_left.savefig('spec_left.png')
 
+    def save_logc_plot_right(self):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
         fig_right=plt.Figure()
         canvas_right=FigureCanvas(fig_right)
         ax_right=fig_right.add_subplot(111)
-        p_right=librosa.display.specshow(librosa.amplitude_to_db(self.instance._DataProcessing__C_right,ref=np.max),ax=ax_right,y_axis='log',x_axis='time')
+        p_left=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__C_right)),sr=self.instance._DataProcessing__rate,ax=ax_right,x_axis='time',y_axis='cqt_note')
         if self.verbose:
-            fig_left.savefig('spec_right_'+self.verbose+'.png')
+            fig_right.savefig('spec_right_'+self.verbose+'.png')
         else:
-            fig_left.savefig('spec_right.png')
+            fig_right.savefig('spec_right.png')
+    
 
+    def save_logc_plot_left_harmonics(self):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig_left=plt.Figure()
+        canvas_left=FigureCanvas(fig_left)
+        ax_left=fig_left.add_subplot(111)
+        p_left=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__hpss_harmonics_left)),sr=self.instance._DataProcessing__rate,ax=ax_left,x_axis='time',y_axis='cqt_note')
+        if self.verbose:
+            fig_left.savefig('spec_left_harmonics_'+self.verbose+'.png')
+        else:
+            fig_left.savefig('spec_left_harmonics.png')
+
+    def save_logc_plot_left_percussive(self):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig_left=plt.Figure()
+        canvas_left=FigureCanvas(fig_left)
+        ax_left=fig_left.add_subplot(111)
+        p_left=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__hpss_percussive_left)),sr=self.instance._DataProcessing__rate,ax=ax_left,x_axis='time',y_axis='cqt_note')
+        if self.verbose:
+            fig_left.savefig('spec_left_percussive_'+self.verbose+'.png')
+        else:
+            fig_left.savefig('spec_left_percussive.png')
+
+
+    def save_logc_plot_right_harmonics(self):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig_right=plt.Figure()
+        canvas_right=FigureCanvas(fig_right)
+        ax_right=fig_right.add_subplot(111)
+        p_left=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__hpss_harmonics_right)),sr=self.instance._DataProcessing__rate,ax=ax_right,x_axis='time',y_axis='cqt_note')
+        if self.verbose:
+            fig_right.savefig('spec_right_harmonics_'+self.verbose+'.png')
+        else:
+            fig_right.savefig('spec_right_harmonics.png')
+
+    def save_logc_plot_right_percussive(self):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig_right=plt.Figure()
+        canvas_right=FigureCanvas(fig_right)
+        ax_right=fig_right.add_subplot(111)
+        p_right=librosa.display.specshow(librosa.amplitude_to_db(np.abs(self.instance._DataProcessing__hpss_percussive_right)),sr=self.instance._DataProcessing__rate,ax=ax_right,x_axis='time',y_axis='cqt_note')
+        if self.verbose:
+            fig_right.savefig('spec_right_percussive_'+self.verbose+'.png')
+        else:
+            fig_right.savefig('spec_right_percussive.png')

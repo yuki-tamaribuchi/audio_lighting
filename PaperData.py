@@ -33,7 +33,7 @@ class PaperData():
                 writer=csv.writer(f)
                 writer.writerows(chroma_scale)
 
-
+    '''
     def save_logc_plot_left(self):
         import librosa
         import librosa.display
@@ -119,3 +119,4 @@ class PaperData():
             fig_right.savefig('spec_right_percussive_'+self.verbose+'.png')
         else:
             fig_right.savefig('spec_right_percussive.png')
+        '''

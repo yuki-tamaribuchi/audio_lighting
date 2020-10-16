@@ -16,7 +16,7 @@ from concurrent import futures
 class DataProcessing():
 
 
-    def __init__(self,file,mode,concurrent_mode):
+    def __init__(self,file,mode,concurrent_mode,n_bins=48,hop_length=4096,fmin=130.813,win_len_smooth=20):
         self.brightness=[[],[]]
         self.brightness_from_video=[]
         self.__concurrent_mode=concurrent_mode
@@ -44,7 +44,7 @@ class DataProcessing():
                     
                 #self.__dump_audio_array_length()
                 self.__hpss_execute()
-                self.__chromacens_execute()
+                self.__chromacens_execute(fmin=fmin,n_bins=n_bins,hop_length=hop_length,win_len_smooth=win_len_smooth)
                 self.__create_brightness_data()
                 self.__save_brightness_data()
                 self.__create_color_data()

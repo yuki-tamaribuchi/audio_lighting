@@ -14,12 +14,7 @@ dp1=DataProcessing(file,'v',True)
 
 pd=PaperData(dp1)
 pd.create_chroma_array()
-pd.save_logc_plot_left()
-pd.save_logc_plot_right()
-pd.save_logc_plot_left_harmonics()
-pd.save_logc_plot_left_percussive()
-pd.save_logc_plot_right_harmonics()
-pd.save_logc_plot_right_percussive()
+
 
 
 #lt1=Lighting('192.168.11.99')

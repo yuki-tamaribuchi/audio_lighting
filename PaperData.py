@@ -120,3 +120,33 @@ class PaperData():
         else:
             fig_right.savefig('spec_right_percussive.png')
         '''
+
+
+    def left_cens_plot(self,verbose=None):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig=plt.Figure()
+        canvas=FigureCanvas(fig)
+        ax=fig.add_subplot(111)
+        p=librosa.display.specshow(self.instance._DataProcessing__cens_left,sr=self.instance._DataProcessing__rate,ax=ax,x_axis='time',y_axis='chroma',vmin=0,vmax=1)
+        if self.verbose:
+            fig.savefig('cens_left_'+self.verbose+'.png')
+        else:
+            fig.savefig('cens_left.png')
+
+
+    def right_cens_plot(self,verbose=None):
+        import librosa
+        import librosa.display
+        from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+
+        fig=plt.Figure()
+        canvas=FigureCanvas(fig)
+        ax=fig.add_subplot(111)
+        p=librosa.display.specshow(self.instance._DataProcessing__cens_right,sr=self.instance._DataProcessing__rate,ax=ax,x_axis='time',y_axis='chroma',vmin=0,vmax=1)
+        if self.verbose:
+            fig.savefig('cens_right_'+self.verbose+'.png')
+        else:
+            fig.savefig('cens_right.png')

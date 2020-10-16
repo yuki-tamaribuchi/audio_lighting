@@ -14,8 +14,8 @@ dp1=DataProcessing(file,'v',True)
 
 pd=PaperData(dp1)
 pd.create_chroma_array()
-
-
+pd.left_cens_plot()
+pd.right_cens_plot()
 
 #lt1=Lighting('192.168.11.99')
 

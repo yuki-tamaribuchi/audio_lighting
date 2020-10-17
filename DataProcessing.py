@@ -82,8 +82,8 @@ class DataProcessing():
             results=[]
             def future_execute(self):
                 with futures.ThreadPoolExecutor(max_workers=2) as executer:
-                    results.append(executer.submit(librosa.effects.hpss,self.__normalized_data[:,0]))
-                    results.append(executer.submit(librosa.effects.hpss,self.__normalized_data[:,1]))
+                    results.append(executer.submit(librosa.effects.hpss,self.__loaded_data[:,0]))
+                    results.append(executer.submit(librosa.effects.hpss,self.__loaded_data[:,1]))
             future_execute(self)
             self.__hpss_harmonics_left,self.__hpss_percussion_left=results[0].result()
             self.__hpss_harmonics_right,self.__hpss_percussion_right=results[1].result()

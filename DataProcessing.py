@@ -59,6 +59,7 @@ class DataProcessing():
     def __load_audio(self,file):
         print('Loading Start')
         self.__rate,self.__loaded_data=wavfile.read(file)
+        self.__loaded_data=self.__loaded_data.astype(np.float)
         self.__normalized_data=self.__loaded_data/32768
         #self.__dump_audio_array_length()
         self.audio_time_length=len(self.__normalized_data)/self.__rate
@@ -88,8 +89,8 @@ class DataProcessing():
             self.__hpss_harmonics_left,self.__hpss_percussion_left=results[0].result()
             self.__hpss_harmonics_right,self.__hpss_percussion_right=results[1].result()
         else:
-            self.__hpss_harmonics_left,self.__hpss_percussion_left=librosa.effects.hpss(self.__normalized_data[:,0])
-            self.__hpss_harmonics_right,self.__hpss_percussion_right=librosa.effects.hpss(self.__normalized_data[:,1])
+            self.__hpss_harmonics_left,self.__hpss_percussion_left=librosa.effects.hpss(self.__loaded_data[:,0])
+            self.__hpss_harmonics_right,self.__hpss_percussion_right=librosa.effects.hpss(self.__loaded_data[:,1])
         print('HPSS End')
         
 

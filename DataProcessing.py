@@ -27,7 +27,7 @@ class DataProcessing():
                 self.__load_color_data_from_csv()
                 self.__load_brightness_data_from_csv()
             else:
-                self.__dump_audio_array_length()
+                #self.__dump_audio_array_length()
                 self.__hpss_execute()
                 self.__chromacens_execute()
                 self.__create_brightness_data()

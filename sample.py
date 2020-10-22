@@ -6,7 +6,7 @@ import time
 
 #実装サンプル
 
-file='media_file/piano_file/piano_only_bpm100_original.wav'
+file='media_file/piano_file/piano_only_bpm60_original.wav'
 
 #audio->'a',video->'v'
 dp1=DataProcessing(file,'a',True)
